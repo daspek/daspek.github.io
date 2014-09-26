@@ -1,8 +1,56 @@
 <html>
   <head>
-      <title>welcome to TwoDrive</title>
+      <title>welcome to twoDrive</title>
+      <script type="text/javascript" src="https://code.jquery.com/jquery-1.4.2.min.js"></script>
+      <script type="text/javascript">
+      (function($){
+
+          $(document).ready(function(){
+              $('#od-search').bind('submit', function() {
+                  odurl = "https://newapi.users.storage.live.com/me/files:children";
+                  $('#od-images').empty();
+                  $('<p></p>').text('loading...').appendTo('#od-images');
+
+
+             $.ajax({
+                      url: odurl,
+                      dataType: 'json',
+                      success: function(data) {
+                          if (data.ok) {
+                              $('#od-images').empty();
+                              if (data.count > 0) {
+                                  $.each(data.results, function(i,item) {
+                                      //$("<img/>").attr("src", item.Images[0].url_75x75).appendTo("#od-images").wrap(
+                                      //    "<a href='" + item.url + "'></a>"
+                                      //);
+                                      $('foo_').appendTo('#od-images');
+                                      if (i%4 == 3) {
+                                          $('<br/>').appendTo('#od-images');
+                                      }
+                                  });
+                              } else {
+                                  $('<p>fooerror.</p>').appendTo('#od-images');
+                              }
+                          } else {
+                              $('#od-images').empty();
+                              alert(data);
+                          }
+                      }
+                  });
+
+                  return false;
+              });
+          });
+
+      })(jQuery);
+      </script>
   </head>
   <body>
-      test2
+      <form id="od-search">
+          <input type="text" id="od-terms" size="32">
+          <button>load</button>
+      </form>
+
+      <div id="od-images"></div>
   </body>
 </html>
