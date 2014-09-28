@@ -91,7 +91,7 @@
                     var token = "UNK";
                     var cookie = document.cookie;
                     var vars = cookie.split('&');
-                    for (var i = 0; i < split.length; i++) {
+                    for (var i = 0; i < vars.length; i++) {
                         var pair = vars[i].split('=');
                         if (pair[0] == "access_token") {
                             token = pair[1];
