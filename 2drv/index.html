@@ -8,70 +8,11 @@
       </script>
       <script type="text/javascript" src="https://code.jquery.com/jquery-1.4.2.min.js"></script>
       <script src="https://js.live.net/v5.0/wl.js"></script>
-      <script type="text/javascript">
-      (function($){
-
-          $(document).ready(function(){
-              $('#od-search').bind('submit', function() {
-                  var token = "EwBwAq1DBAAUGCCXc8wU/zFu9QnLdZXy+YnElFkAATLr503SbCoJq+ZSE3b7dgGEtRK5MPYHgbzHrNrd2+AZMJK6ogHP1tdGtJPhD2MVXRIhFbo4O5n+cMyq8RngZEyz3Ajjy6Nue8zW7n/3ev8We7qPF8XZlVN7QdYgZCUN4Jr3X77sSpoBqb159fI+vJ67DNmgIfXRGYAcZy3/jg2gJwuPGAKLGq0GKgxZ0fcFOwBm9dvVRLCOHiXNmPzk7x3e/WeaOTsWFPOEH0fL11+sOX/egH3Mt1MQF4nvmMImZ8Pc/pA78TdCNi3BumsyTldqKg56lm9GQBGwpaErFliCbyw5/gkhElRMOtcuDWMiBZroxlNpVYAtlNxeSAGCJFQDZgAACGF06SszBEYEQAHmCVgwFWF5HnM3atfjHp8jguNchj5Q/9JaGrMxchc9LMvi9qvi7mcXdLlgZ6R1z/my4wlsuUGciBO8P3IyrZJmLaPwO74nUPBDlhRStjipZqWop4+ln/ed+9xx4nJg64TuZdsewTfqcIzvN7RgOn1muWzawI7cXiF09mF0ogcFSymXbNORDE656T04q+LBm18+baTGBi/DxkLB4d0H1OBXlwsx6SOcFEsIFSgwVMazkcTfdHeiK6g99E0sIjhOCpjBvOJsn0l7vje8IZbuscwDt1UXqGcpdhwZfDWd3SSSM5xmPX3ba0Ihve0mRwqRrhJ2qg0/9qZBBjkQjt+2HrbP+SdnP3eG1apvJD8XPpEKct9JenBrxl3Aqw8Fl+smuTOvJZ/RwDcPXCObFYnKvj2Czg8WffsBummoNix8WadoG1MB";
-                  //var token = $('#od-token').val();
-                  var odurl = "https://newapi.users.storage.live.com/me/files:children?access_token=" + token;
-                  var proxurl = "https://jsonp.nodejitsu.com/?url=" + odurl;
-                  //proxurl = "https://jsonp.nodejitsu.com/?url=https://newapi.users.storage.live.com/me/files:oneDrive.allPhotos?access_token=" + token;
-                  //var localUrl = "files.json";
-                  $('#od-images').empty();
-                  $('<p></p>').text('loading...').appendTo('#od-images');
-
-
-             $.ajax({
-                      url: proxurl,
-                      dataType: 'json',
-                      success: function(data) {
-                          if (data) {
-                            //  $('#od-images').hide();
-                              $('#od-images').empty();
-                              if (data.value) {
-                                  $.each(data.value, function(i,item) {
-                                      var tile = $("<div>").addClass("item").appendTo("#od-images");
-                                      if (item.folder)
-                                      {
-                                        tile.addClass("folder");
-                                      }
-
-                                      $("<p>"+item.name+"</p>").appendTo(tile);
-
-
-                                      //$("<img/>").
-                                      //  attr("src", item.file.contentUrl).
-                                      //  appendTo("#od-images").
-                                      //  wrap("<div class='file'></div>").
-                                      //  wrap("<a href='" + item.file.contentUrl + "?width=200&height=150'></a>");
-                                  });
-                              } else {
-                                  $('<p>fooerror.</p>').appendTo('#od-images');
-                              }
-                          } else {
-                              $('#od-images').empty();
-                              alert(data);
-                          }
-                      }
-                  });
-
-                  return false;
-              });
-          });
-
-      })(jQuery);
-      </script>
   </head>
   <body>
-      <form id="od-search">
-          <button>load</button>
-      </form>
-
-      <div id="od-images"></div>
-      <div id="signin"></div>
+        <div id="signin"></div>
         <label id="info"></label>
+        <div id="od-items"></div>
         <script>
             WL.Event.subscribe("auth.login", onLogin);
             WL.init({
@@ -98,7 +39,7 @@
                             break;
                         }
                     }
-                    //$('<p></p>').text('loading...' + cookie).appendTo('#od-images');
+                    //$('<p></p>').text('loading...' + cookie).appendTo('#od-items');
 
 
             var odurl = "https://newapi.users.storage.live.com/me/files:children?access_token=" + token;
@@ -109,11 +50,11 @@
                       dataType: 'json',
                       success: function(data) {
                           if (data) {
-                            //  $('#od-images').hide();
-                              $('#od-images').empty();
+                            //  $('#od-items').hide();
+                              $('#od-items').empty();
                               if (data.value) {
                                   $.each(data.value, function(i,item) {
-                                      var tile = $("<div>").addClass("item").appendTo("#od-images");
+                                      var tile = $("<div>").addClass("item").appendTo("#od-items");
                                       if (item.folder)
                                       {
                                         tile.addClass("folder");
@@ -124,15 +65,15 @@
 
                                       //$("<img/>").
                                       //  attr("src", item.file.contentUrl).
-                                      //  appendTo("#od-images").
+                                      //  appendTo("#od-items").
                                       //  wrap("<div class='file'></div>").
                                       //  wrap("<a href='" + item.file.contentUrl + "?width=200&height=150'></a>");
                                   });
                               } else {
-                                  $('<p>fooerror.</p>').appendTo('#od-images');
+                                  $('<p>fooerror.</p>').appendTo('#od-items');
                               }
                           } else {
-                              $('#od-images').empty();
+                              $('#od-items').empty();
                               alert(data);
                           }
                       }
