@@ -63,11 +63,13 @@
                                   if (data.children)
                                   {
                                     $.each(data.children, function(i,item) {
-                                        var tile = $("<div>").
+                                        var link = $("<a>").
                                           attr("href", "#" + path + "/" + item.name).
-                                          click(function(){window.location=$(this).attr('href')}).
-                                          addClass("item").
                                           appendTo("#od-items");
+
+                                        var tile = $("<div>").
+                                          addClass("item").
+                                          appendTo(link);
 
                                         if (item.folder)
                                         {
