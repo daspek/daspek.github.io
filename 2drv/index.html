@@ -155,15 +155,15 @@
                                     addClass("oneup").
                                     appendTo("#od-items");
 
-                                  if (item.folder)
+                                  if (data.folder)
                                   {
                                     tile.addClass("folder");
                                   }
 
-                                  if (item.image)
+                                  if (data.image)
                                   {
                                     $("<img>").
-                                      attr("src", item.file.contentUrl).
+                                      attr("src", data.file.contentUrl).
                                       appendTo(tile);
                                   }
                                 }
