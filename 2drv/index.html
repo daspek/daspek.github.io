@@ -71,7 +71,7 @@
                                   {
                                     $.each(data.children, function(i,item) {
                                         var tile = $("<div>").
-                                          attr("href", "#" + path + "/" + item.name).
+                                          attr("href", "#" + path + "/" + encodeURIComponent(item.name)).
                                           addClass("item").
                                           click(function(){window.location = $(this).attr('href');}).
                                           appendTo("#od-items");
@@ -81,9 +81,9 @@
                                           tile.addClass("folder");
                                         }
 
-                                        if (item.photo)
+                                        if (item.image)
                                         {
-                                          var img = $("img").
+                                          $("img").
                                             attr("src", item.file.contentUrl+"?width=200&height=150").
                                             appendTo(tile);
                                         }
