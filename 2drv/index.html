@@ -29,10 +29,11 @@
                 if (!session.error) {
                   (function($){
 
-                    var path = document.URL.substr(document.URL.indexOf('#') + 1);
-                    if (!path)
+                    var path ="";
+                    var hashIndex = document.URL.indexOf('#');
+                    if (hashIndex > 0)
                     {
-                      path ="";
+                      path = document.URL.substr(hashIndex + 1);
                     }
 
                     var token = "UNK";
