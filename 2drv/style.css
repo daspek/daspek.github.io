@@ -4,6 +4,7 @@
   height: 150px;
   margin: 0.25em;
   background-color: #608946;
+  cursor: pointer;
 }
 
 .folder {

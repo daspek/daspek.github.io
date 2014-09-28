@@ -12,6 +12,7 @@
   <body>
         <div id="signin"></div>
         <label id="info"></label>
+        <div id="od-loadingInfo"></div>
         <div id="od-items"></div>
         <script>
             WL.Event.subscribe("auth.login", onLogin);
@@ -54,16 +55,18 @@
 
             var odurl = "https://newapi.users.storage.live.com/me/files" + path + "?$expand=children%26access_token=" + token;
             var proxurl = "https://jsonp.nodejitsu.com/?url=" + odurl;
-              $('<p></p>').text('loading...').appendTo('#od-items');
+              $('<p></p>').text('loading...').appendTo('#od-loadingInfo');
              $.ajax({
                       url: proxurl,
                       dataType: 'json',
                       success: function(data) {
                           if (data) {
                               $('#od-items').empty();
+                              $('#od-loadingInfo').empty();
                               if (data) {
-                                  document.title = data.parentInfo.path + "/" + data.name;
-                                  $('<p></p>').text(document.title).appendTo('#od-items');
+                                  var fullPath = data.parentInfo.path + "/" + data.name;
+                                  document.title = "twodrive - " + fullPath;
+                                  $('<p></p>').text(fullPath).appendTo('#od-items');
                                   if (data.children)
                                   {
                                     $.each(data.children, function(i,item) {
@@ -76,6 +79,13 @@
                                         if (item.folder)
                                         {
                                           tile.addClass("folder");
+                                        }
+
+                                        if (item.photo)
+                                        {
+                                          var img = $("img").
+                                            attr("src", item.file.contentUrl+"?width=200&height=150").
+                                            appendTo(tile);
                                         }
 
                                         $("<p>"+item.name+"</p>").appendTo(tile);
