@@ -87,11 +87,21 @@
             function onLogin (session) {
                 if (!session.error) {
                   (function($){
+
+                    var token = "UNK";
                     var cookie = document.cookie;
+                    var split = cookie.split('&');
+                    for (var i = 0; i < split.length; i++) {
+                        var pair = vars[i].split('=');
+                        if (pair[0] == "access_token") {
+                            token = pair[1];
+                            break;
+                        }
+                    }
                     //$('<p></p>').text('loading...' + cookie).appendTo('#od-images');
 
 
-            var odurl = "https://newapi.users.storage.live.com/me/files:children?" + cookie;
+            var odurl = "https://newapi.users.storage.live.com/me/files:children?access_token=" + token;
             var proxurl = "https://jsonp.nodejitsu.com/?url=" + odurl;
 
              $.ajax({
