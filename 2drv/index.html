@@ -88,7 +88,7 @@
                               $('#od-items').empty();
                               $('#od-loadingInfo').empty();
                               $('#od-json').empty();
-                              $('#od-json').append($("pre").html(syntaxHighlight(data)));
+                              $('#od-json').append($("<pre>").html(syntaxHighlight(data)));
 
                               if (data) {
                                   var fullPath = data.parentInfo.path + "/" + data.name;
