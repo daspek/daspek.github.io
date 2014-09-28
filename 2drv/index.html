@@ -87,10 +87,10 @@
             function onLogin (session) {
                 if (!session.error) {
                   document.getElementById("info").innerText = "blah ok";
-                  //(function($){
-                    //var cookie = $.cookie("wl_auth");
-                    //$('<p></p>').text('loading...' + cookie).appendTo('#od-images');
-                  //})(jQuery);
+                  (function($){
+                    var cookie = "monster"; //$.cookie("wl_auth");
+                    $('<p></p>').text('loading...' + cookie).appendTo('#od-images');
+                  })(jQuery);
                     // WL.api({
                     //     path: "me",
                     //     method: "GET"
