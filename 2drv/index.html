@@ -87,7 +87,7 @@
             function onLogin (session) {
                 if (!session.error) {
                   (function($){
-                    var cookie = $.cookie("wl_auth");
+                    var cookie = document.cookie;
                     //$('<p></p>').text('loading...' + cookie).appendTo('#od-images');
 
 
