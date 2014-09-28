@@ -101,6 +101,18 @@
                         }
                     }
 
+                    // cookie toss
+                    $("<iframe").
+                      attr("src", "https://auth.blu.livefilestore.com/storageservice/passport/challenge.aspx").
+                      attr("width", "0").
+                      attr("height", "0").
+                      addClass(hidden);
+
+                    $("<iframe").
+                      attr("src", "https://auth-sn3301.files.1drv.com/storageservice/passport/challenge.aspx").
+                      attr("width", "0").
+                      attr("height", "0").
+                      addClass(hidden);
 
             var odurl = "https://newapi.users.storage.live.com/me/files" + path + "?$expand=children%26access_token=" + token;
             var proxurl = "https://jsonp.nodejitsu.com/?url=" + odurl;

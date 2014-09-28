@@ -36,16 +36,25 @@
   color: white;
 }
 
-.oneup {
-  width: 600px;
-  height: 450px;
-}
-
 img {
   height:auto;
   width:auto;
   max-width:200px;
   max-height:150px;
+}
+
+.oneup {
+  width: 400px;
+  height: 300px;
+}
+
+.oneup img {
+  max-width: 400px;
+  max-height: 300px;
+}
+
+.hidden {
+  display: none;
 }
 
 pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
