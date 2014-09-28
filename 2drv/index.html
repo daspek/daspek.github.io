@@ -38,18 +38,18 @@
             {
               if (obj)
               {
-                  if (obj.itemInfo)
-                  {
-                    obj.itemInfo = null;
-                  }
+                if (obj.itemInfo)
+                {
+                  obj.itemInfo = null;
+                }
 
-                  if (obj.children)
+                if (obj.children)
+                {
+                  for (var i = 0; i < obj.children.length; i++)
                   {
-                    for (var i = 0; i < obj.children.length; i++)
-                    {
-                        sanitize(obj.children[i]);
-                    }
+                      sanitize(obj.children[i]);
                   }
+                }
               }
             }
 
@@ -116,50 +116,62 @@
 
                               $("<pre>").html(syntaxHighlight(data)).appendTo("#od-json");
 
-                              if (data) {
-                                  var fullPath = data.parentInfo.path + "/" + data.name;
-                                  document.title = "twodrive - " + fullPath;
-                                  $('<p></p>').text(fullPath).appendTo('#od-items');
-                                  if (data.children)
-                                  {
-                                    $.each(data.children, function(i,item) {
-                                        var tile = $("<div>").
-                                          attr("href", "#" + path + "/" + encodeURIComponent(item.name)).
-                                          addClass("item").
-                                          click(function(){window.location = $(this).attr('href');}).
-                                          appendTo("#od-items");
+                                var fullPath = data.parentInfo.path + "/" + data.name;
+                                document.title = "twodrive - " + fullPath;
+                                $('<p></p>').text(fullPath).appendTo('#od-items');
+                                if (data.children)
+                                {
+                                  $.each(data.children, function(i,item) {
+                                      var tile = $("<div>").
+                                        attr("href", "#" + path + "/" + encodeURIComponent(item.name)).
+                                        addClass("item").
+                                        click(function(){window.location = $(this).attr('href');}).
+                                        appendTo("#od-items");
 
-                                        if (item.folder)
-                                        {
-                                          tile.addClass("folder");
-                                        }
+                                      if (item.folder)
+                                      {
+                                        tile.addClass("folder");
+                                      }
 
-                                        if (item.image)
-                                        {
-                                          $("<img>").
-                                            attr("src", item.file.contentUrl).
-                                            appendTo(tile);
-                                        }
-
-
-                                        $("<div>").
-                                          addClass("nameplate").
-                                          text(item.name).
+                                      if (item.image)
+                                      {
+                                        $("<img>").
+                                          attr("src", item.file.contentUrl).
                                           appendTo(tile);
-                                    });
-                                  }
-                                  else
+                                      }
+
+
+                                      $("<div>").
+                                        addClass("nameplate").
+                                        text(item.name).
+                                        appendTo(tile);
+                                  });
+                                }
+                                else
+                                {
+                                  // 1-up view
+                                  var tile = $("<div>").
+                                    addClass("item").
+                                    addClass("oneup").
+                                    appendTo("#od-items");
+
+                                  if (item.folder)
                                   {
-                                    // 1-up view
-
-
+                                    tile.addClass("folder");
                                   }
-                              } else {
-                                  $('<p>error.</p>').appendTo('#od-items');
-                              }
+
+                                  if (item.image)
+                                  {
+                                    $("<img>").
+                                      attr("src", item.file.contentUrl).
+                                      appendTo(tile);
+                                  }
+                                }
                           } else {
                               $('#od-items').empty();
-                              alert(data);
+                              $('#od-loadingInfo').empty();
+                              $('<p>error.</p>').appendTo('#od-loadingInfo');
+                              $('#od-json').empty();
                           }
                       }
                   });

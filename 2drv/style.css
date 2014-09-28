@@ -36,6 +36,11 @@
   color: white;
 }
 
+.oneup {
+  width: 600px;
+  height: 450px;
+}
+
 img {
   height:auto;
   width:auto;
