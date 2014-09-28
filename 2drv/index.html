@@ -46,7 +46,6 @@
                             break;
                         }
                     }
-                    //$('<p></p>').text('loading...' + cookie).appendTo('#od-items');
 
 
             var odurl = "https://newapi.users.storage.live.com/me/files" + path + "?$expand=children%26access_token=" + token;
@@ -63,13 +62,11 @@
                                   if (data.children)
                                   {
                                     $.each(data.children, function(i,item) {
-                                        var link = $("<a>").
-                                          attr("href", "#" + path + "/" + item.name).
-                                          appendTo("#od-items");
-
                                         var tile = $("<div>").
+                                          attr("href", "#" + path + "/" + item.name).
                                           addClass("item").
-                                          appendTo(link);
+                                          click(function(){window.location = $(this).attr('href')}).
+                                          appendTo("#od-items");
 
                                         if (item.folder)
                                         {
