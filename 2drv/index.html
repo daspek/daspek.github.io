@@ -1,6 +1,6 @@
 <html>
   <head>
-      <title>welcome to twoDrive</title>
+      <title>twodrive</title>
       <link rel="stylesheet" type="text/css" href="style.css">
       <script type="text/javascript">
         var APP_CLIENT_ID = "000000004812DC2E";
@@ -28,6 +28,11 @@
             function onLogin (session) {
                 if (!session.error) {
                   (function($){
+
+                    $(window).bind('hashchange', function() {
+                      onLogin(session);
+                      return false;
+                    }
 
                     var path ="";
                     var hashIndex = document.URL.indexOf('#');
@@ -58,14 +63,15 @@
                           if (data) {
                               $('#od-items').empty();
                               if (data) {
-                                  $('<p></p>').text(data.parentInfo.path + "/" + data.name).appendTo('#od-items');
+                                  document.title = data.parentInfo.path + "/" + data.name;
+                                  $('<p></p>').text(document.title).appendTo('#od-items');
                                   if (data.children)
                                   {
                                     $.each(data.children, function(i,item) {
                                         var tile = $("<div>").
                                           attr("href", "#" + path + "/" + item.name).
                                           addClass("item").
-                                          click(function(){window.location = $(this).attr('href'); onLogin(session);}).
+                                          click(function(){window.location = $(this).attr('href');}).
                                           appendTo("#od-items");
 
                                         if (item.folder)
