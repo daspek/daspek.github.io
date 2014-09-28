@@ -3,8 +3,8 @@
   width: 200px;
   height: 150px;
   margin: 0.25em;
-  background-color: #608946;
   cursor: pointer;
+  border: 1px solid #094AB2;
 }
 
 .folder {
