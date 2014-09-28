@@ -42,7 +42,7 @@
                     //$('<p></p>').text('loading...' + cookie).appendTo('#od-items');
 
 
-            var odurl = "https://newapi.users.storage.live.com/me/files:children?access_token=" + token;
+            var odurl = "https://newapi.users.storage.live.com/me/files?$expand=children&amp;access_token=" + token;
             var proxurl = "https://jsonp.nodejitsu.com/?url=" + odurl;
 
              $.ajax({
@@ -50,27 +50,32 @@
                       dataType: 'json',
                       success: function(data) {
                           if (data) {
-                            //  $('#od-items').hide();
                               $('#od-items').empty();
-                              if (data.value) {
-                                  $.each(data.value, function(i,item) {
-                                      var tile = $("<div>").addClass("item").appendTo("#od-items");
-                                      if (item.folder)
-                                      {
-                                        tile.addClass("folder");
-                                      }
+                              $('<p></p>').text('loading...').appendTo('#od-items');
+                              if (data) {
+                                  $('#od-items').empty();
+                                  $('<p></p>').text('loaded ' + data.name).appendTo('#od-items');
+                                  if (data.children)
+                                  {
+                                    $.each(data.children, function(i,item) {
+                                        var tile = $("<div>").addClass("item").appendTo("#od-items");
+                                        if (item.folder)
+                                        {
+                                          tile.addClass("folder");
+                                        }
 
-                                      $("<p>"+item.name+"</p>").appendTo(tile);
+                                        $("<p>"+item.name+"</p>").appendTo(tile);
 
 
-                                      //$("<img/>").
-                                      //  attr("src", item.file.contentUrl).
-                                      //  appendTo("#od-items").
-                                      //  wrap("<div class='file'></div>").
-                                      //  wrap("<a href='" + item.file.contentUrl + "?width=200&height=150'></a>");
-                                  });
+                                        //$("<img/>").
+                                        //  attr("src", item.file.contentUrl).
+                                        //  appendTo("#od-items").
+                                        //  wrap("<div class='file'></div>").
+                                        //  wrap("<a href='" + item.file.contentUrl + "?width=200&height=150'></a>");
+                                    });
+                                  }
                               } else {
-                                  $('<p>fooerror.</p>').appendTo('#od-items');
+                                  $('<p>error.</p>').appendTo('#od-items');
                               }
                           } else {
                               $('#od-items').empty();
