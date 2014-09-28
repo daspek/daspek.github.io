@@ -1,32 +1,51 @@
 <html>
   <head>
       <title>welcome to twoDrive</title>
+      <link rel="stylesheet" type="text/css" href="style.css">
+      <script type="text/javascript">
+        var APP_CLIENT_ID = "000000004812DC2E";
+        var REDIRECT_URL = "https://daspek.github.io/2drv/callback.html";
+      </script>
       <script type="text/javascript" src="https://code.jquery.com/jquery-1.4.2.min.js"></script>
+      <script src="https://js.live.net/v5.0/wl.js"></script>
       <script type="text/javascript">
       (function($){
 
           $(document).ready(function(){
               $('#od-search').bind('submit', function() {
-                  odurl = "https://newapi.users.storage.live.com/me/files:children";
+                  var token = "EwBwAq1DBAAUGCCXc8wU/zFu9QnLdZXy+YnElFkAATLr503SbCoJq+ZSE3b7dgGEtRK5MPYHgbzHrNrd2+AZMJK6ogHP1tdGtJPhD2MVXRIhFbo4O5n+cMyq8RngZEyz3Ajjy6Nue8zW7n/3ev8We7qPF8XZlVN7QdYgZCUN4Jr3X77sSpoBqb159fI+vJ67DNmgIfXRGYAcZy3/jg2gJwuPGAKLGq0GKgxZ0fcFOwBm9dvVRLCOHiXNmPzk7x3e/WeaOTsWFPOEH0fL11+sOX/egH3Mt1MQF4nvmMImZ8Pc/pA78TdCNi3BumsyTldqKg56lm9GQBGwpaErFliCbyw5/gkhElRMOtcuDWMiBZroxlNpVYAtlNxeSAGCJFQDZgAACGF06SszBEYEQAHmCVgwFWF5HnM3atfjHp8jguNchj5Q/9JaGrMxchc9LMvi9qvi7mcXdLlgZ6R1z/my4wlsuUGciBO8P3IyrZJmLaPwO74nUPBDlhRStjipZqWop4+ln/ed+9xx4nJg64TuZdsewTfqcIzvN7RgOn1muWzawI7cXiF09mF0ogcFSymXbNORDE656T04q+LBm18+baTGBi/DxkLB4d0H1OBXlwsx6SOcFEsIFSgwVMazkcTfdHeiK6g99E0sIjhOCpjBvOJsn0l7vje8IZbuscwDt1UXqGcpdhwZfDWd3SSSM5xmPX3ba0Ihve0mRwqRrhJ2qg0/9qZBBjkQjt+2HrbP+SdnP3eG1apvJD8XPpEKct9JenBrxl3Aqw8Fl+smuTOvJZ/RwDcPXCObFYnKvj2Czg8WffsBummoNix8WadoG1MB";
+                  //var token = $('#od-token').val();
+                  var odurl = "https://newapi.users.storage.live.com/me/files:children?access_token=" + token;
+                  var proxurl = "https://jsonp.nodejitsu.com/?url=" + odurl;
+                  //proxurl = "https://jsonp.nodejitsu.com/?url=https://newapi.users.storage.live.com/me/files:oneDrive.allPhotos?access_token=" + token;
+                  //var localUrl = "files.json";
                   $('#od-images').empty();
                   $('<p></p>').text('loading...').appendTo('#od-images');
 
 
              $.ajax({
-                      url: odurl,
+                      url: proxurl,
                       dataType: 'json',
                       success: function(data) {
-                          if (data.ok) {
+                          if (data) {
+                            //  $('#od-images').hide();
                               $('#od-images').empty();
-                              if (data.count > 0) {
-                                  $.each(data.results, function(i,item) {
-                                      //$("<img/>").attr("src", item.Images[0].url_75x75).appendTo("#od-images").wrap(
-                                      //    "<a href='" + item.url + "'></a>"
-                                      //);
-                                      $('foo_').appendTo('#od-images');
-                                      if (i%4 == 3) {
-                                          $('<br/>').appendTo('#od-images');
+                              if (data.value) {
+                                  $.each(data.value, function(i,item) {
+                                      var tile = $("<div>").addClass("item").appendTo("#od-images");
+                                      if (item.folder)
+                                      {
+                                        tile.addClass("folder");
                                       }
+
+                                      $("<p>"+item.name+"</p>").appendTo(tile);
+
+
+                                      //$("<img/>").
+                                      //  attr("src", item.file.contentUrl).
+                                      //  appendTo("#od-images").
+                                      //  wrap("<div class='file'></div>").
+                                      //  wrap("<a href='" + item.file.contentUrl + "?width=200&height=150'></a>");
                                   });
                               } else {
                                   $('<p>fooerror.</p>').appendTo('#od-images');
@@ -47,10 +66,45 @@
   </head>
   <body>
       <form id="od-search">
-          <input type="text" id="od-terms" size="32">
           <button>load</button>
       </form>
 
       <div id="od-images"></div>
+      <div id="signin"></div>
+        <label id="info"></label>
+        <script>
+            WL.Event.subscribe("auth.login", onLogin);
+            WL.init({
+                client_id: APP_CLIENT_ID,
+                redirect_uri: REDIRECT_URL,
+                scope: "wl.signin,wl_skydrive,wl_skydrive_upload,wl_contacts_skydrive",
+                response_type: "token"
+            });
+            WL.ui({
+                name: "signin",
+                element: "signin"
+            });
+            function onLogin (session) {
+                if (!session.error) {
+                    WL.api({
+                        path: "me",
+                        method: "GET"
+                    }).then(
+                        function (response) {
+                            document.getElementById("info").innerText =
+                                "Hello, " + response.first_name + " " + response.last_name + "!";
+                        },
+                        function (responseFailed) {
+                            document.getElementById("info").innerText =
+                                "Error calling API: " + responseFailed.error.message;
+                        }
+                    );
+                }
+                else {
+                    document.getElementById("info").innerText =
+                        "Error signing in: " + session.error_description;
+                }
+            }
+        </script>
   </body>
 </html>
