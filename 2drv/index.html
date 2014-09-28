@@ -13,7 +13,10 @@
         <div id="signin"></div>
         <label id="info"></label>
         <div id="od-loadingInfo"></div>
-        <div id="od-items"></div>
+        <div id="od-content">
+          <div id="od-items" class="od-pagecol"/>
+          <div id="od-json" class="od-pagecol"/>
+        </div>
         <script>
             WL.Event.subscribe("auth.login", onLogin);
             WL.init({
@@ -30,6 +33,27 @@
               onLogin(session);
               return false;
             });
+
+            // from http://jsfiddle.net/KJQ9K/554/
+            function syntaxHighlight(obj) {
+                var json = JSON.stringify(obj, undefined, 4)
+                json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                    var cls = 'number';
+                    if (/^"/.test(match)) {
+                        if (/:$/.test(match)) {
+                            cls = 'key';
+                        } else {
+                            cls = 'string';
+                        }
+                    } else if (/true|false/.test(match)) {
+                        cls = 'boolean';
+                    } else if (/null/.test(match)) {
+                        cls = 'null';
+                    }
+                    return '<span class="' + cls + '">' + match + '</span>';
+                });
+            }
 
             function onLogin (session) {
                 if (!session.error) {
@@ -63,6 +87,9 @@
                           if (data) {
                               $('#od-items').empty();
                               $('#od-loadingInfo').empty();
+                              $('#od-json').empty();
+                              $('#od-json').append($("pre").html(syntaxHighlight(data)));
+
                               if (data) {
                                   var fullPath = data.parentInfo.path + "/" + data.name;
                                   document.title = "twodrive - " + fullPath;
@@ -93,15 +120,13 @@
                                           addClass("nameplate").
                                           text(item.name).
                                           appendTo(tile);
-                                        //$("<p>"+item.name+"</p>").appendTo(tile);
-
-
-                                        //$("<img/>").
-                                        //  attr("src", item.file.contentUrl).
-                                        //  appendTo("#od-items").
-                                        //  wrap("<div class='file'></div>").
-                                        //  wrap("<a href='" + item.file.contentUrl + "?width=200&height=150'></a>");
                                     });
+                                  }
+                                  else
+                                  {
+                                    // 1-up view
+
+
                                   }
                               } else {
                                   $('<p>error.</p>').appendTo('#od-items');
