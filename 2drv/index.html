@@ -63,15 +63,17 @@
                                   if (data.children)
                                   {
                                     $.each(data.children, function(i,item) {
-                                        var tile = $("<div>").addClass("item").appendTo("#od-items");
+                                        var tile = $("<div>").
+                                          addClass("item").
+                                          wrap("<a href='#" + path + "/" + item.name"'></a>").
+                                          appendTo("#od-items");
+
                                         if (item.folder)
                                         {
                                           tile.addClass("folder");
                                         }
 
                                         $("<p>"+item.name+"</p>").appendTo(tile);
-
-                                        tile.wrap("<a href='" + path + "/" + item.name"'></a>");
 
 
                                         //$("<img/>").
