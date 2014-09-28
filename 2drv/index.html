@@ -86,24 +86,51 @@
             });
             function onLogin (session) {
                 if (!session.error) {
-                  document.getElementById("info").innerText = "blah ok";
                   (function($){
-                    var cookie = "monster"; //$.cookie("wl_auth");
-                    $('<p></p>').text('loading...' + cookie).appendTo('#od-images');
+                    var cookie = $.cookie("wl_auth");
+                    //$('<p></p>').text('loading...' + cookie).appendTo('#od-images');
+
+
+            var odurl = "https://newapi.users.storage.live.com/me/files:children?" + cookie;
+            var proxurl = "https://jsonp.nodejitsu.com/?url=" + odurl;
+
+             $.ajax({
+                      url: proxurl,
+                      dataType: 'json',
+                      success: function(data) {
+                          if (data) {
+                            //  $('#od-images').hide();
+                              $('#od-images').empty();
+                              if (data.value) {
+                                  $.each(data.value, function(i,item) {
+                                      var tile = $("<div>").addClass("item").appendTo("#od-images");
+                                      if (item.folder)
+                                      {
+                                        tile.addClass("folder");
+                                      }
+
+                                      $("<p>"+item.name+"</p>").appendTo(tile);
+
+
+                                      //$("<img/>").
+                                      //  attr("src", item.file.contentUrl).
+                                      //  appendTo("#od-images").
+                                      //  wrap("<div class='file'></div>").
+                                      //  wrap("<a href='" + item.file.contentUrl + "?width=200&height=150'></a>");
+                                  });
+                              } else {
+                                  $('<p>fooerror.</p>').appendTo('#od-images');
+                              }
+                          } else {
+                              $('#od-images').empty();
+                              alert(data);
+                          }
+                      }
+                  });
+
+
+
                   })(jQuery);
-                    // WL.api({
-                    //     path: "me",
-                    //     method: "GET"
-                    // }).then(
-                    //     function (response) {
-                    //         document.getElementById("info").innerText =
-                    //             "Hello, " + response.first_name + " " + response.last_name + "!";
-                    //     },
-                    //     function (responseFailed) {
-                    //         document.getElementById("info").innerText =
-                    //             "Error calling API: " + responseFailed.error.message;
-                    //     }
-                    // );
                 }
                 else {
                     document.getElementById("info").innerText =
