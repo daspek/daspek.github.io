@@ -65,7 +65,7 @@
                                         var tile = $("<div>").
                                           attr("href", "#" + path + "/" + item.name).
                                           addClass("item").
-                                          click(function(){window.location = $(this).attr('href')}).
+                                          click(function(){window.location = $(this).attr('href'); onLogin(session);}).
                                           appendTo("#od-items");
 
                                         if (item.folder)
