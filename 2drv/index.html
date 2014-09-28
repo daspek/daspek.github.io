@@ -42,7 +42,7 @@
                     //$('<p></p>').text('loading...' + cookie).appendTo('#od-items');
 
 
-            var odurl = "https://newapi.users.storage.live.com/me/files?$expand=children&amp;access_token=" + token;
+            var odurl = "https://newapi.users.storage.live.com/me/files?$expand=children%26access_token=" + token;
             var proxurl = "https://jsonp.nodejitsu.com/?url=" + odurl;
 
              $.ajax({
