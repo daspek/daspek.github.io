@@ -29,6 +29,12 @@
                 if (!session.error) {
                   (function($){
 
+                    var path = document.URL.substr(document.URL.indexOf('#') + 1);
+                    if (!path)
+                    {
+                      path ="";
+                    }
+
                     var token = "UNK";
                     var cookie = document.cookie;
                     var vars = cookie.split('&');
@@ -42,19 +48,17 @@
                     //$('<p></p>').text('loading...' + cookie).appendTo('#od-items');
 
 
-            var odurl = "https://newapi.users.storage.live.com/me/files?$expand=children%26access_token=" + token;
+            var odurl = "https://newapi.users.storage.live.com/me/files" + path + "?$expand=children%26access_token=" + token;
             var proxurl = "https://jsonp.nodejitsu.com/?url=" + odurl;
-
+              $('<p></p>').text('loading...').appendTo('#od-items');
              $.ajax({
                       url: proxurl,
                       dataType: 'json',
                       success: function(data) {
                           if (data) {
                               $('#od-items').empty();
-                              $('<p></p>').text('loading...').appendTo('#od-items');
                               if (data) {
-                                  $('#od-items').empty();
-                                  $('<p></p>').text('loaded ' + data.name).appendTo('#od-items');
+                                  $('<p></p>').text(data.parentInfo.path + "/" + data.name).appendTo('#od-items');
                                   if (data.children)
                                   {
                                     $.each(data.children, function(i,item) {
