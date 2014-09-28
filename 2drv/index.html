@@ -14,8 +14,8 @@
         <label id="info"></label>
         <div id="od-loadingInfo"></div>
         <div id="od-content">
-          <div id="od-items" class="od-pagecol"/>
-          <div id="od-json" class="od-pagecol"/>
+          <div id="od-items" class="od-pagecol"></div>
+          <div id="od-json" class="od-pagecol"></div>
         </div>
         <script>
             WL.Event.subscribe("auth.login", onLogin);
@@ -88,7 +88,8 @@
                               $('#od-items').empty();
                               $('#od-loadingInfo').empty();
                               $('#od-json').empty();
-                              $('#od-json').append($("<pre>").html(syntaxHighlight(data)));
+
+                              $("<pre>").html(syntaxHighlight(data)).appendTo("#od-json");
 
                               if (data) {
                                   var fullPath = data.parentInfo.path + "/" + data.name;
