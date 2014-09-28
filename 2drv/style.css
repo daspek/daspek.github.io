@@ -1,13 +1,12 @@
-.od-pagecol {
-  display: inline-block;
-  position: relative;
+#od-json {
+  overflow: hidden;
+  float: right;
+  max-width: 40%;
 }
 
-#od-json {
-  width: 300px;
-  overflow: hidden;
-  position: absolute;
-  right: 0px;
+#od-items {
+  max-width: 60%;
+  float: left;
 }
 
 .item {
