@@ -45,15 +45,17 @@
 
                   if (obj.children)
                   {
-                    for (var i = 0; i < obj.children.length; i++) {
+                    for (var i = 0; i < obj.children.length; i++)
+                    {
                         sanitize(obj.children[i]);
+                    }
                   }
               }
             }
 
             // from http://jsfiddle.net/KJQ9K/554/
             function syntaxHighlight(obj) {
-
+              sanitize(obj);
               if (obj.itemInfo && obj.itemInfo.CreatedBy)
               {
                 obj.itemInfo.CreatedBy.userPassportId = null;
