@@ -25,15 +25,14 @@
                 name: "signin",
                 element: "signin"
             });
+            $(window).bind('hashchange', function() {
+              onLogin(session);
+              return false;
+            });
+
             function onLogin (session) {
                 if (!session.error) {
                   (function($){
-
-                    $(window).bind('hashchange', function() {
-                      onLogin(session);
-                      return false;
-                    });
-
                     var path ="";
                     var hashIndex = document.URL.indexOf('#');
                     if (hashIndex > 0)
