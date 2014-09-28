@@ -88,7 +88,12 @@
                                             appendTo(tile);
                                         }
 
-                                        $("<p>"+item.name+"</p>").appendTo(tile);
+
+                                        $("<div>").
+                                          addClass("nameplate").
+                                          text(item.name).
+                                          appendTo(tile);
+                                        //$("<p>"+item.name+"</p>").appendTo(tile);
 
 
                                         //$("<img/>").

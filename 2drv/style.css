@@ -5,6 +5,16 @@
   margin: 0.25em;
   cursor: pointer;
   border: 1px solid #094AB2;
+  overflow: hidden;
+}
+
+.nameplate {
+    background-color: #094AB2;
+    color: white;
+    width: 200px;
+    height: 30px;
+    position: absolute;
+    bottom: 0px;
 }
 
 .folder {
