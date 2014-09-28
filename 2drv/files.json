@@ -1,0 +1,509 @@
+{
+    "id": "D4648F06C91D9D3D!4013",
+    "name": "LiveFolders",
+    "folder": {
+        "color": 608946
+    },
+    "itemInfo": {
+        "createdBy": [
+            {
+                "userCid": -3142229380691026400,
+                "userPassportId": 1899945719755806
+            }
+        ],
+        "createdDateTime": "2007-05-15T01:43:13.3Z",
+        "eTag": "D4648F06C91D9D3D!4013.3545",
+        "lastModifiedBy": [
+            {
+                "userCid": -3142229380691026400,
+                "userPassportId": 1899945719755806
+            }
+        ],
+        "lastModifiedDateTime": "2014-01-25T01:13:13.373Z",
+        "size": 32252608919
+    },
+    "parentInfo": {
+        "parentId": "D4648F06C91D9D3D!0",
+        "path": ""
+    },
+    "children": [
+        {
+            "name": "2drv",
+            "id": "D4648F06C91D9D3D!44273",
+            "folder": {
+                "color": 608946
+            },
+            "itemInfo": {
+                "createdBy": [
+                    {
+                        "userCid": -3142229380691026400,
+                        "userPassportId": 1899945719755806
+                    },
+                    {
+                        "customName": "SkyDriveSync",
+                        "customValue": "c2082805-a96f-4fd0-aa7f-f76d462e916a"
+                    }
+                ],
+                "createdDateTime": "2014-09-26T03:19:17Z",
+                "eTag": "D4648F06C91D9D3D!44273.0",
+                "lastModifiedBy": [
+                    {
+                        "userCid": -3142229380691026400,
+                        "userPassportId": 1899945719755806
+                    },
+                    {
+                        "customName": "SkyDriveSync",
+                        "customValue": "c2082805-a96f-4fd0-aa7f-f76d462e916a"
+                    }
+                ],
+                "lastModifiedDateTime": "2014-09-26T03:19:17Z",
+                "size": 2059
+            },
+            "parentInfo": {
+                "parentId": "D4648F06C91D9D3D!4013",
+                "path": "/LiveFolders"
+            }
+        },
+        {
+            "name": "blaaa",
+            "id": "D4648F06C91D9D3D!24335",
+            "folder": {
+                "color": 608946
+            },
+            "itemInfo": {
+                "createdBy": [
+                    {
+                        "userCid": -3142229380691026400,
+                        "userPassportId": 1899945719755806
+                    },
+                    {
+                        "applicationId": 1141147648
+                    }
+                ],
+                "createdDateTime": "2014-05-13T17:51:48.16Z",
+                "eTag": "D4648F06C91D9D3D!24335.1",
+                "lastModifiedBy": [
+                    {
+                        "userCid": -3142229380691026400,
+                        "userPassportId": 1899945719755806
+                    },
+                    {
+                        "applicationId": 1275403270
+                    }
+                ],
+                "lastModifiedDateTime": "2014-05-23T18:15:13.56Z",
+                "size": 484923
+            },
+            "parentInfo": {
+                "parentId": "D4648F06C91D9D3D!4013",
+                "path": "/LiveFolders"
+            }
+        },
+        {
+            "name": "cachedttiles",
+            "id": "D4648F06C91D9D3D!31521",
+            "folder": {
+                "color": 608946
+            },
+            "itemInfo": {
+                "createdBy": [
+                    {
+                        "userCid": -3142229380691026400,
+                        "userPassportId": 1899945719755806
+                    },
+                    {
+                        "customName": "SkyDriveSync",
+                        "customValue": "cdfa065b-d467-4436-9441-5bfd653ec158"
+                    }
+                ],
+                "createdDateTime": "2014-07-30T18:31:18Z",
+                "eTag": "D4648F06C91D9D3D!31521.1",
+                "lastModifiedBy": [
+                    {
+                        "userCid": -3142229380691026400,
+                        "userPassportId": 1899945719755806
+                    },
+                    {
+                        "applicationId": 1208340322
+                    }
+                ],
+                "lastModifiedDateTime": "2014-07-30T18:33:10.433Z",
+                "size": 81418
+            },
+            "parentInfo": {
+                "parentId": "D4648F06C91D9D3D!4013",
+                "path": "/LiveFolders"
+            }
+        },
+        {
+            "name": "crap",
+            "id": "D4648F06C91D9D3D!7922",
+            "folder": {
+                "color": 608946
+            },
+            "itemInfo": {
+                "createdBy": [
+                    {
+                        "userCid": -3142229380691026400,
+                        "userPassportId": 1899945719755806
+                    }
+                ],
+                "createdDateTime": "2012-11-29T10:59:48.987Z",
+                "eTag": "D4648F06C91D9D3D!7922.0",
+                "lastModifiedBy": [
+                    {
+                        "userCid": -3142229380691026400,
+                        "userPassportId": 1899945719755806
+                    }
+                ],
+                "lastModifiedDateTime": "2012-11-29T10:59:48.987Z",
+                "size": 686014919
+            },
+            "parentInfo": {
+                "parentId": "D4648F06C91D9D3D!4013",
+                "path": "/LiveFolders"
+            }
+        },
+        {
+            "name": "Documents (Microsoft)",
+            "id": "D4648F06C91D9D3D!12827",
+            "folder": {
+                "color": 608946
+            },
+            "itemInfo": {
+                "createdBy": [
+                    {
+                        "userCid": -3142229380691026400,
+                        "userPassportId": 1899945719755806
+                    }
+                ],
+                "createdDateTime": "2014-01-02T20:26:58.907Z",
+                "eTag": "D4648F06C91D9D3D!12827.0",
+                "lastModifiedBy": [
+                    {
+                        "userCid": -3142229380691026400,
+                        "userPassportId": 1899945719755806
+                    }
+                ],
+                "lastModifiedDateTime": "2014-01-02T20:26:58.907Z",
+                "size": 12585472083
+            },
+            "jumpInfo": {
+                "jumpId": "MSDocs"
+            },
+            "parentInfo": {
+                "parentId": "D4648F06C91D9D3D!4013",
+                "path": "/LiveFolders"
+            }
+        },
+        {
+            "name": "Documents2",
+            "id": "D4648F06C91D9D3D!7684",
+            "folder": {
+                "color": 608946
+            },
+            "itemInfo": {
+                "createdBy": [
+                    {
+                        "userCid": -3142229380691026400,
+                        "userPassportId": 1899945719755806
+                    }
+                ],
+                "createdDateTime": "2011-01-18T19:33:57.69Z",
+                "eTag": "D4648F06C91D9D3D!7684.1",
+                "lastModifiedBy": [
+                    {
+                        "userCid": -3142229380691026400,
+                        "userPassportId": 1899945719755806
+                    }
+                ],
+                "lastModifiedDateTime": "2012-03-25T23:13:17.12Z",
+                "size": 2704138088
+            },
+            "jumpInfo": {
+                "jumpId": "Documents"
+            },
+            "parentInfo": {
+                "parentId": "D4648F06C91D9D3D!4013",
+                "path": "/LiveFolders"
+            }
+        },
+        {
+            "name": "Jumptuit",
+            "id": "D4648F06C91D9D3D!24922",
+            "folder": {
+                "color": 608946
+            },
+            "itemInfo": {
+                "createdBy": [
+                    {
+                        "userCid": -3142229380691026400,
+                        "userPassportId": 1899945719755806
+                    },
+                    {
+                        "applicationId": 1275403270
+                    }
+                ],
+                "createdDateTime": "2014-05-23T18:11:15.473Z",
+                "eTag": "D4648F06C91D9D3D!24922.0",
+                "lastModifiedBy": [
+                    {
+                        "userCid": -3142229380691026400,
+                        "userPassportId": 1899945719755806
+                    },
+                    {
+                        "applicationId": 1275403270
+                    }
+                ],
+                "lastModifiedDateTime": "2014-05-23T18:11:15.473Z",
+                "size": 0
+            },
+            "parentInfo": {
+                "parentId": "D4648F06C91D9D3D!4013",
+                "path": "/LiveFolders"
+            }
+        },
+        {
+            "name": "Music",
+            "id": "D4648F06C91D9D3D!4016",
+            "folder": {
+                "color": 608946
+            },
+            "itemInfo": {
+                "createdBy": [
+                    {
+                        "userCid": -3142229380691026400,
+                        "userPassportId": 1899945719755806
+                    }
+                ],
+                "createdDateTime": "2007-05-15T01:43:14.52Z",
+                "eTag": "D4648F06C91D9D3D!4016.2",
+                "lastModifiedBy": [
+                    {
+                        "userCid": -3142229380691026400,
+                        "userPassportId": 1899945719755806
+                    },
+                    {
+                        "applicationId": 1275403270
+                    }
+                ],
+                "lastModifiedDateTime": "2014-02-26T21:09:08.017Z",
+                "size": 83258605
+            },
+            "jumpInfo": {
+                "jumpId": "Music"
+            },
+            "parentInfo": {
+                "parentId": "D4648F06C91D9D3D!4013",
+                "path": "/LiveFolders"
+            }
+        },
+        {
+            "name": "Pictures",
+            "id": "D4648F06C91D9D3D!4014",
+            "folder": {
+                "color": 608946
+            },
+            "itemInfo": {
+                "createdBy": [
+                    {
+                        "userCid": -3142229380691026400,
+                        "userPassportId": 1899945719755806
+                    }
+                ],
+                "createdDateTime": "2007-05-15T01:43:13.8Z",
+                "eTag": "D4648F06C91D9D3D!4014.5",
+                "lastModifiedBy": [
+                    {
+                        "userCid": -3142229380691026400,
+                        "userPassportId": 1899945719755806
+                    },
+                    {
+                        "applicationId": 1141147648
+                    }
+                ],
+                "lastModifiedDateTime": "2014-08-04T18:25:11.623Z",
+                "size": 16154763263
+            },
+            "jumpInfo": {
+                "jumpId": "Photos"
+            },
+            "parentInfo": {
+                "parentId": "D4648F06C91D9D3D!4013",
+                "path": "/LiveFolders"
+            }
+        },
+        {
+            "name": "planning",
+            "id": "D4648F06C91D9D3D!7823",
+            "folder": {
+                "color": 608946
+            },
+            "itemInfo": {
+                "createdBy": [
+                    {
+                        "userCid": -3142229380691026400,
+                        "userPassportId": 1899945719755806
+                    },
+                    {
+                        "customName": "SkyDriveSync",
+                        "customValue": "be50893f-5175-47cb-bb52-c071488715d0"
+                    }
+                ],
+                "createdDateTime": "2012-09-05T03:25:29Z",
+                "eTag": "D4648F06C91D9D3D!7823.0",
+                "lastModifiedBy": [
+                    {
+                        "userCid": -3142229380691026400,
+                        "userPassportId": 1899945719755806
+                    },
+                    {
+                        "customName": "SkyDriveSync",
+                        "customValue": "be50893f-5175-47cb-bb52-c071488715d0"
+                    }
+                ],
+                "lastModifiedDateTime": "2012-09-05T03:25:44Z",
+                "size": 6392274
+            },
+            "parentInfo": {
+                "parentId": "D4648F06C91D9D3D!4013",
+                "path": "/LiveFolders"
+            }
+        },
+        {
+            "name": "Public",
+            "id": "D4648F06C91D9D3D!4017",
+            "folder": {
+                "color": 608946
+            },
+            "itemInfo": {
+                "createdBy": [
+                    {
+                        "userCid": -3142229380691026400,
+                        "userPassportId": 1899945719755806
+                    }
+                ],
+                "createdDateTime": "2007-05-15T01:43:14.893Z",
+                "eTag": "D4648F06C91D9D3D!4017.2",
+                "lastModifiedBy": [
+                    {
+                        "userCid": -3142229380691026400,
+                        "userPassportId": 1899945719755806
+                    }
+                ],
+                "lastModifiedDateTime": "2011-01-07T21:19:54.887Z",
+                "size": 8102582
+            },
+            "parentInfo": {
+                "parentId": "D4648F06C91D9D3D!4013",
+                "path": "/LiveFolders"
+            }
+        },
+        {
+            "name": "testfolder",
+            "id": "D4648F06C91D9D3D!11083",
+            "folder": {
+                "color": 608946
+            },
+            "itemInfo": {
+                "createdBy": [
+                    {
+                        "userCid": -3142229380691026400,
+                        "userPassportId": 1899945719755806
+                    }
+                ],
+                "createdDateTime": "2013-10-23T03:15:43.69Z",
+                "eTag": "D4648F06C91D9D3D!11083.2",
+                "lastModifiedBy": [
+                    {
+                        "userCid": 8064805816209913000,
+                        "userPassportId": 844427466365732
+                    }
+                ],
+                "lastModifiedDateTime": "2013-10-23T03:15:43.69Z",
+                "size": 136
+            },
+            "parentInfo": {
+                "parentId": "D4648F06C91D9D3D!4013",
+                "path": "/LiveFolders"
+            }
+        },
+        {
+            "name": "work",
+            "id": "D4648F06C91D9D3D!7926",
+            "folder": {
+                "color": 608946
+            },
+            "itemInfo": {
+                "createdBy": [
+                    {
+                        "userCid": -3142229380691026400,
+                        "userPassportId": 1899945719755806
+                    },
+                    {
+                        "customName": "SkyDriveSync",
+                        "customValue": "cdfa065b-d467-4436-9441-5bfd653ec158"
+                    }
+                ],
+                "createdDateTime": "2012-12-01T08:40:48Z",
+                "eTag": "D4648F06C91D9D3D!7926.0",
+                "lastModifiedBy": [
+                    {
+                        "userCid": -3142229380691026400,
+                        "userPassportId": 1899945719755806
+                    },
+                    {
+                        "customName": "SkyDriveSync",
+                        "customValue": "cdfa065b-d467-4436-9441-5bfd653ec158"
+                    }
+                ],
+                "lastModifiedDateTime": "2012-12-01T08:40:56Z",
+                "size": 23891923
+            },
+            "parentInfo": {
+                "parentId": "D4648F06C91D9D3D!4013",
+                "path": "/LiveFolders"
+            }
+        },
+        {
+            "name": "no.txt",
+            "id": "D4648F06C91D9D3D!25662",
+            "file": {
+                "contentUrl": "http://3elhgg-sn3302.files-df.1drv.com/y2pxk9UiWfUVGJm2MbIKjYSsPzVOFCUaMUW84b2F9gkj3n_ANytHgTo413tZ-3HGrNUbfuHh2CvgLplgHNZAmDK4hHBWnBhcAKXiemZ4k9mrNNKU26QrUNAl8xm-NeAJka5",
+                "hashes": {
+                    "crc32Hash": "oLBcag==",
+                    "sha1Hash": "D+UtTAMR7l0DwV0Jf74w0CkpUws="
+                },
+                "mimeType": "text/plain"
+            },
+            "itemInfo": {
+                "createdBy": [
+                    {
+                        "userCid": -3142229380691026400,
+                        "userPassportId": 1899945719755806
+                    },
+                    {
+                        "deviceId": 6755402679756439
+                    }
+                ],
+                "createdDateTime": "2014-06-11T04:03:36.923Z",
+                "eTag": "D4648F06C91D9D3D!25662.3",
+                "lastModifiedBy": [
+                    {
+                        "userCid": -3142229380691026400,
+                        "userPassportId": 1899945719755806
+                    },
+                    {
+                        "deviceId": 6755402679756439
+                    }
+                ],
+                "lastModifiedDateTime": "2014-06-11T04:04:25.383Z",
+                "size": 187
+            },
+            "parentInfo": {
+                "parentId": "D4648F06C91D9D3D!4013",
+                "path": "/LiveFolders"
+            }
+        }
+    ]
+}
