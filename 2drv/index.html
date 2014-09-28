@@ -119,7 +119,7 @@
                                 var fullPath = data.parentInfo.path + "/" + data.name;
                                 document.title = "twodrive - " + fullPath;
                                 $('<p></p>').text(fullPath).appendTo('#od-items');
-                                if (data.children)
+                                if (data.children && data.folder)
                                 {
                                   $.each(data.children, function(i,item) {
                                       var tile = $("<div>").
