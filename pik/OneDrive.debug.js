@@ -18,8 +18,8 @@ OneDrive.open = function(options) {
     /// <param name="options" type="Object">
     /// Required. A JSON object that includes the following properties:
     /// &#10; multiSelect:  Optional. Boolean with value set to 'true' for multi-select (allow user to select multiple files)
-    /// and 'false' (default) for single-select. 
-    /// &#10; linkType:  Optional. Type of link to the file, "webViewLink" (default) for a sharing link, and "downloadLink" for a 
+    /// and 'false' (default) for single-select.
+    /// &#10; linkType:  Optional. Type of link to the file, "webViewLink" (default) for a sharing link, and "downloadLink" for a
     /// link to download the file.
     /// &#10; success:  Required. A callback function invoked after the request has succeeded. Argument: [fileObject,...] where
     /// fileObject contains properties: fileName, link, linkType, size, and thumbnails.
@@ -43,16 +43,16 @@ OneDrive.open = function(options) {
 
 OneDrive.save = function(options) {
     /// <summary>
-    /// Saves a file to a folder in a user's OneDrive. 
+    /// Saves a file to a folder in a user's OneDrive.
     /// </summary>
     /// <param name="options" type="Object">
     /// Required. A JSON object that includes the following properties:
     /// &#10; fileName:  Optional. The name for the file as it will appear in the user's OneDrive. If this is not supplied, the
-    /// file name will either be inferred from the URL (e.g., http://mydomain.com/file_name.ext - file name = file_name.ext )or 
+    /// file name will either be inferred from the URL (e.g., http://mydomain.com/file_name.ext - file name = file_name.ext )or
     /// from the name attribute of the input element.
     /// &#10; file:  Required. Either a URL for the file to upload, or the id of a form file input element.
     /// &#10; success:  Optional. A callback function invoked after the request has succeeded. Arguments: none.
-    /// &#10; progress: Optional. A callback function that is periodically invoked during the file upload. Arguments: float with 
+    /// &#10; progress: Optional. A callback function that is periodically invoked during the file upload. Arguments: float with
     /// value ranging from 0.0 to 100.0 representing the percentage of the file upload operation that has been completed. Will be
     /// called at least once and the final call will be passed 100 indicating completion.
     /// &#10; cancel:  Optional. A callback function invoked when the user cancels the folder picker operation. Arguments: none
@@ -82,8 +82,8 @@ OneDrive.createOpenButton = function (options) {
     /// Required. A JSON object that includes the following properties:
     /// &#10; theme: Optional. The color theme of the button, either "blue" (default) or "white".
     /// &#10; multiSelect:  Optional. Boolean with value set to 'true' for multi-select (allow user to select multiple files)
-    /// and 'false' (default) for single-select. 
-    /// &#10; linkType:  Optional. Type of link to the file, "webViewLink" (default) for a sharing link, and "downloadLink" for a 
+    /// and 'false' (default) for single-select.
+    /// &#10; linkType:  Optional. Type of link to the file, "webViewLink" (default) for a sharing link, and "downloadLink" for a
     /// link to download the file.
     /// &#10; success:  Required. A callback function invoked after the request has succeeded. Argument: [fileObject,...] where
     /// fileObject contains properties: fileName, link, linkType, size, and thumbnails.
@@ -115,17 +115,17 @@ OneDrive.createOpenButton = function (options) {
 
 OneDrive.createSaveButton = function(options) {
     /// <summary>
-    /// Create a button that saves a file to a folder in a user's OneDrive. 
+    /// Create a button that saves a file to a folder in a user's OneDrive.
     /// </summary>
     /// <param name="options" type="Object">
     /// Required. A JSON object that includes the following properties:
     /// &#10; theme: Optional. The color theme of the button, either "blue" (default) or "white".
     /// &#10; fileName:  Optional. The name for the file as it will appear in the user's OneDrive. If this is not supplied, the
-    /// file name will either be inferred from the URL (e.g., http://mydomain.com/file_name.ext - file name = file_name.ext )or 
+    /// file name will either be inferred from the URL (e.g., http://mydomain.com/file_name.ext - file name = file_name.ext )or
     /// from the name attribute of the input element.
     /// &#10; file:  Required. Either a URL for the file to upload, or the id of a form file input element.
     /// &#10; success:  Optional. A callback function invoked after the request has succeeded. Arguments: none.
-    /// &#10; progress: Optional. A callback function that is periodically invoked during the file upload. Arguments: float with 
+    /// &#10; progress: Optional. A callback function that is periodically invoked during the file upload. Arguments: float with
     /// value ranging from 0.0 to 100.0 representing the percentage of the file upload operation that has been completed. Will be
     /// called at least once and the final call will be passed 100 indicating completion.
     /// &#10; cancel:  Optional. A callback function invoked when the user cancels the folder picker operation. Arguments: none
@@ -175,7 +175,7 @@ OneDriveApp.onloadInit = function() {
     /// </summary>
 
     // Add OneDrive save button classes to document style.
-    
+
     // Turn links into OneDrive save buttons.
     var linkTags = document.getElementsByTagName("a");
     for (var i = 0; i < linkTags.length; i++) {
@@ -283,7 +283,7 @@ OneDriveApp.prototype = {
             },
             // Error callback.
             function (fileDialogError) {
-                // If the error was access denied (user cancelled the file dialog), call the cancel callback, 
+                // If the error was access denied (user cancelled the file dialog), call the cancel callback,
                 // otherwise process the error as normal.
                 fileDialogError.error === ERROR_ACCESS_DENIED ?
                     invokeCallback(cancel) : that.processError(fileDialogError, ERROR_DESC_OPERATION_PICKER);
@@ -307,7 +307,7 @@ OneDriveApp.prototype = {
         var file = options[ONEDRIVE_PARAM_FILE],
             fileName = options[ONEDRIVE_PARAM_FILENAME],
             uploadType = UPLOADTYPE_FORM;
-        
+
         if (isPathFullUrl(file)) {
             // Upload from URL scenario.
             uploadType = UPLOADTYPE_URL;
@@ -358,7 +358,7 @@ OneDriveApp.prototype = {
                                     var location = apiResponse[API_PARAM_LOCATION];
 
                                     // Started remote upload.
-                                    (apiResponse[API_PARAM_STATUS_HTTP] === API_STATUS_HTTP_ACCEPTED && !stringIsNullOrEmpty(location)) ? 
+                                    (apiResponse[API_PARAM_STATUS_HTTP] === API_STATUS_HTTP_ACCEPTED && !stringIsNullOrEmpty(location)) ?
                                         that.beginPolling(success, progress, error, location) :
                                         that.processErrorCallback(apiResponse, method, ERROR_DESC_OPERATION_UPLOAD);
                                 },
@@ -404,7 +404,7 @@ OneDriveApp.prototype = {
             },
             // Error callback.
             function (fileDialogError) {
-                // If the error was access denied (user cancelled the file dialog), call the cancel callback, 
+                // If the error was access denied (user cancelled the file dialog), call the cancel callback,
                 // otherwise process the error as normal.
                 fileDialogError.error === ERROR_ACCESS_DENIED ?
                     invokeCallback(cancel) : that.processError(fileDialogError, ERROR_DESC_OPERATION_PICKER);
@@ -622,7 +622,7 @@ var API_DOWNLOAD = "download",
     API_STATUS_SUCCESS = "success",
     API_SUPPRESS_REDIRECTS = "suppress_redirects",
     API_SUPPRESS_RESPONSE_CODES = "suppress_response_codes",
-    API_X_HTTP_LIVE_LIBRARY = "x_http_live_library";    
+    API_X_HTTP_LIVE_LIBRARY = "x_http_live_library";
 
 /**
  * Application status values indicating whether the app has invoked WL.init(...).
@@ -653,7 +653,7 @@ var AK_ACCESS_TOKEN = "access_token",
     AK_SECURE_COOKIE = "secure_cookie",
     AK_STATE = "state",
     AK_STATUS = "status";
-    
+
 var AK_COOKIE_KEYS = [AK_ACCESS_TOKEN, AK_AUTH_TOKEN, AK_SCOPE, AK_EXPIRES_IN, AK_EXPIRES];
 
 /**
@@ -680,7 +680,7 @@ var CK_APPID = "appId",
 */
 var COOKIE_AUTH = "wl_auth",  // This cookie stores the Auth information.
     COOKIE_UPLOAD = "wl_upload";
-    
+
 /**
 * Display types.
 */
@@ -776,7 +776,7 @@ var IMETHOD_FILEDIALOG = "WL.fileDialog",
 var MAX_GETLOGINSTATUS_TIME = 30000;
 
 var METHOD = "METHOD",
-    PARAM = "PARAM";  
+    PARAM = "PARAM";
 
 /**
  * Promise class event names.
@@ -792,10 +792,10 @@ var PROMISE_EVENT_ONSUCCESS = "onSuccess",
  * upload is a value of the parameter and is used for WL.upload Form POST redirects.
  */
 var REDIRECT_TYPE = "redirect_type",
-    REDIRECT_TYPE_AUTH = "auth",  
+    REDIRECT_TYPE_AUTH = "auth",
     REDIRECT_TYPE_UPLOAD = "upload";
 
-/** 
+/**
  * Response type values.
  */
 var RESPONSE_TYPE_CODE = "code",
@@ -812,7 +812,7 @@ var SCHEME_HTTPS = "https:",
  */
 var SCOPE_SIGNIN = "wl.signin",
     SCOPE_SKYDRIVE = "wl.skydrive",
-    SCOPE_SKYDRIVE_UPDATE = "wl.skydrive_update", 
+    SCOPE_SKYDRIVE_UPDATE = "wl.skydrive_update",
     SCOPE_DELIMINATOR = /\s|,/;
 
 /**
@@ -876,7 +876,7 @@ window.WL = {
     getSession: function () {
         /// <summary>
         /// A synchronous function that gets the current session object, if it exists.
-        /// </summary> 
+        /// </summary>
         /// <returns type="Object" >The current session object.</returns>
 
         try {
@@ -889,16 +889,16 @@ window.WL = {
 
     getLoginStatus: function (callback, force) {
         /// <summary>
-        /// Returns the status of the current user. If the user is signed in and 
+        /// Returns the status of the current user. If the user is signed in and
         /// connected to your application, it returns the session object.
-        /// This is an asynchronous function that returns the user's status by contacting the Windows Live 
+        /// This is an asynchronous function that returns the user's status by contacting the Windows Live
         /// OAuth server. If the user status is already known, the library may return what is cached.
-        /// However, you can force the library to retrieve up-to-date status by setting the "force" 
-        /// parameter to true. This is an async method that returns a Promise object that allows you to 
+        /// However, you can force the library to retrieve up-to-date status by setting the "force"
+        /// parameter to true. This is an async method that returns a Promise object that allows you to
         /// attach events to handle succeeded and failed situations.
         /// </summary>
         /// <param name="callback" type="Function">Optional. The callback function that is invoked when the user's login status is retrieved.</param>
-        /// <param name="force" type="Boolean">Optional. If set to false (default), the function may return an existing user status, if it exists. 
+        /// <param name="force" type="Boolean">Optional. If set to false (default), the function may return an existing user status, if it exists.
         /// Otherwise, if set to true, the function contacts the server to determine the user's status.</param>
         /// <returns type="Promise" mayBeNull="false" >The Promise object that allows you to attach events to handle succeeded and failed
         /// situations.</returns>
@@ -918,8 +918,8 @@ window.WL = {
 
     logout: function (callback) {
         /// <summary>
-        /// Logs the user out of Windows Live and clears any user state that is maintained 
-        /// by the JavaScript library, such as cookies. This is an async method that returns a Promise object that 
+        /// Logs the user out of Windows Live and clears any user state that is maintained
+        /// by the JavaScript library, such as cookies. This is an async method that returns a Promise object that
         /// allows you to attach events to handle succeeded and failed situations.
         /// </summary>
         /// <param name="callback" type="Function">Optional. Specifies a callback function that is invoked when logout is complete.</param>
@@ -946,7 +946,7 @@ window.WL = {
 
     api: function (properties, callback) {
         /// <summary>
-        /// Makes a call to the Windows Live REST API. This is an async method that returns a Promise object that allows you to 
+        /// Makes a call to the Windows Live REST API. This is an async method that returns a Promise object that allows you to
         /// attach events to handle succeeded and failed situations.
         /// </summary>
         /// <param name="properties" type="Object">Required. A JSON object containing the properties for making the API call:
@@ -967,7 +967,7 @@ window.WL = {
                 { name: API_PARAM_METHOD, type: TYPE_STRING, optional: true },
                     expectedCallback_Optional],
                 IMETHOD_WL_API);
-                
+
             return wl_app.api(args);
         }
         catch (e) {
@@ -983,8 +983,8 @@ WL.Event = {
         /// <summary>
         /// Adds a handler to an event.
         /// </summary>
-        /// <param name="event" type="String">Required. The name of the event to add a handler to. 
-        /// Available events are: "auth.login", "auth.logout", "auth.sessionChange", 
+        /// <param name="event" type="String">Required. The name of the event to add a handler to.
+        /// Available events are: "auth.login", "auth.logout", "auth.sessionChange",
         /// "auth.statusChange", and "wl.log".</param>
         /// <param name="callback" type="Function">Required. The event handler function to be added to the event.</param>
 
@@ -1008,9 +1008,9 @@ WL.Event = {
         /// Removes a handler from an event.
         /// </summary>
         /// <param name="event" type="String">Required. The name of the event from which to remove a handler.</param>
-        /// <param name="callback" type="Function">Optional. Removes the callback from the event. If this parameter is omitted, all 
+        /// <param name="callback" type="Function">Optional. Removes the callback from the event. If this parameter is omitted, all
         /// callback functions registered to the event are removed.</param>
-        
+
         try {
             // Validate parameters
             validateParams([event, callback],
@@ -1064,7 +1064,7 @@ var wl_event = {
         }
 
         var eHandlers = wl_event._eHandlers[event];
-        
+
         if (eHandlers == null) {
             wl_event._eHandlers[event] = eHandlers = [];
         }
@@ -1117,7 +1117,7 @@ wl_app.appInit = function (properties) {
     if (wl_app.testInit) {
         wl_app.testInit(properties);
     }
-    
+
     wl_app._status = APP_STATUS_INITIALIZED;
     return appInitPlatformSpecific(properties);
 };
@@ -1352,7 +1352,7 @@ function prepareXDRRequest(request) {
     if (token != null) {
         params[AK_ACCESS_TOKEN] = token;
     }
-    
+
     if (method != HTTP_METHOD_GET) {
         requestHeaders.push({ name: API_PARAM_CONTENTTYPE, value: 'application/x-www-form-urlencoded' });
     }
@@ -1360,7 +1360,7 @@ function prepareXDRRequest(request) {
     if (method == HTTP_METHOD_GET || method == HTTP_METHOD_DELETE) {
         reqBody = null;
         xdrMethod = HTTP_METHOD_GET;
-        url += "&" + serializeParameters(params);        
+        url += "&" + serializeParameters(params);
     }
     else {
         reqBody = jsonBody ? JSON.stringify(jsonBody) : serializeParameters(params);
@@ -1387,7 +1387,7 @@ wl_app.download = function (properties) {
 
     ensureAppInited(IMETHOD_WL_DOWNLOAD);
 
-    return new DownloadOperation(properties).execute();    
+    return new DownloadOperation(properties).execute();
 };
 
 function buildFilePathUrlString(path, extra_params) {
@@ -1476,7 +1476,7 @@ DownloadOperation.prototype = {
 
     _start: function () {
         var op = this;
-        
+
         wl_app.getLoginStatus({
             internal: true,
             callback: function () {
@@ -1509,7 +1509,7 @@ DownloadOperation.prototype = {
             callback(result);
         }
 
-        op._promise[promiseEvent](result);        
+        op._promise[promiseEvent](result);
     }
 };
 
@@ -1519,12 +1519,12 @@ DownloadOperation.prototype = {
 wl_app.login = function (properties, internal, isExternalConsentRequest) {
 
     ensureAppInited(IMETHOD_WL_LOGIN);
-    
+
     normalizeLoginScope(properties);
 
     if (!handlePendingLogin(internal)) {
         return createCompletePromise(IMETHOD_WL_LOGIN,
-                                     false/*succeeded*/, 
+                                     false/*succeeded*/,
                                      null,
                                      createErrorResponse(ERROR_REQUEST_FAILED, ERROR_DESC_PENDING_LOGIN_CONFLICT));
     }
@@ -1597,7 +1597,7 @@ wl_app.getLoginStatus = function (properties, force) {
     pendingQueue.push(properties);
 
     if (request != null) {
-        request.execute(); 
+        request.execute();
     }
 
     return wl_app._pendingStatusRequest._promise;
@@ -1629,7 +1629,7 @@ function onGetLoginStatusCompleted(requestProperties, response) {
             log("WL.getLoginStatus: " + response[AK_ERROR_DESC]);
         }
         else {
-            trace("wl_app-onGetLoginStatusCompleted: " + response[AK_ERROR_DESC]);            
+            trace("wl_app-onGetLoginStatusCompleted: " + response[AK_ERROR_DESC]);
         }
     }
 }
@@ -1741,7 +1741,7 @@ function buildUploadToFolderUrlString(location, file_name, overwrite) {
         path += encodeURIComponent(file_name);
     }
 
-    // We only apply "overwrite" parameter when upload to a folder.    
+    // We only apply "overwrite" parameter when upload to a folder.
     if (overwrite === API_PARAM_OVERWRITE_RENAME) {
         // the API Service's rename value is choosenewname
         params[API_PARAM_OVERWRITE] = "choosenewname";
@@ -1753,7 +1753,7 @@ function buildUploadToFolderUrlString(location, file_name, overwrite) {
     if (hasQueryString) {
         path = appendQueryString(path, queryString);
     }
-    
+
     return buildUploadFileUrlString(path, params);
 }
 
@@ -1922,7 +1922,7 @@ UploadOperation.prototype = {
                         overwrite = props[API_PARAM_OVERWRITE];
                     if (isFilePath(path)) {
                         op._uploadPath = buildUploadFileUrlString(location);
-                    } 
+                    }
                     else {
                         op._uploadPath = buildUploadToFolderUrlString(location, file_name, overwrite);
                     }
@@ -1966,7 +1966,7 @@ UploadOperation.prototype = {
 };
 
 /**
- * The pattern for the scope returned at the end of an 
+ * The pattern for the scope returned at the end of an
  * external consent flow.
  * Is of the form PERMISSION_TYPE.ACCESS_LEVEL:PICKER_TYPE|SELECTION_TYPE:RESOURCE_ID
  * Where RESOURCE_ID is the id of the item that the user has granted the application
@@ -2353,7 +2353,7 @@ function invokeCallback(callback, resp, synchronous, state) {
         else {
             delayInvoke(
                 function () {
-                    callback(resp); 
+                    callback(resp);
                 }
             );
         }
@@ -2502,7 +2502,7 @@ function deserializeParameters(value, existingDict) {
 }
 
 /**
- * Serializes a dictionary object into a string value in a format n1=v1&n2=v2&... 
+ * Serializes a dictionary object into a string value in a format n1=v1&n2=v2&...
  */
 function serializeParameters(dict) {
     var serialized = "";
@@ -2557,7 +2557,7 @@ function readUrlParameters(url) {
         var queryEnd = (hashStart > queryStart) ? (hashStart - 1) : url.length;
         dict = deserializeParameters(url.substring(queryStart, queryEnd), dict);
     }
-    
+
     if (hashStart > 0) {
         dict = deserializeParameters(url.substring(hashStart), dict);
     }
@@ -2606,9 +2606,9 @@ var expectedCallback_Required = {
 function validateParams(params, expectedParams, method) {
     if (params instanceof Array) {
         for (var i = 0; i < params.length; i++) {
-            validateParam(params[i], expectedParams[i], method); 
+            validateParam(params[i], expectedParams[i], method);
         }
-    } 
+    }
     else {
         validateParam(params, expectedParams, method);
     }
@@ -2641,7 +2641,7 @@ function validateParamType(param, expected, method, defaultAssignFunc) {
         case TYPE_STRING:
             {
                 if (paramType != TYPE_STRING) {
-                    throw createParamTypeError(paramName, method);                    
+                    throw createParamTypeError(paramName, method);
                 }
                 if (!expected.optional && stringTrim(param) === "") {
                     throw createMissingParamError(paramName, method);
@@ -2665,7 +2665,7 @@ function validateParamType(param, expected, method, defaultAssignFunc) {
         case TYPE_FUNCTION:
             {
                 if (paramType != TYPE_FUNCTION) {
-                    throw createParamTypeError(paramType, method);                    
+                    throw createParamTypeError(paramType, method);
                 }
             }
             break;
@@ -2694,7 +2694,7 @@ function validateParamType(param, expected, method, defaultAssignFunc) {
             }
             break;
     }
-    
+
     if (expected.allowedValues != null) {
          validateAllowedValue(param, expected.allowedValues, expected.caseSensitive, paramName, method);
     }
@@ -2717,7 +2717,7 @@ function validateProperties(param, expectedProperties, method) {
 
 function validateAllowedValue(value, allowedValues, caseSensitive, paramName, method) {
     var isString = typeof (allowedValues[0]) === TYPE_STRING;
-    for (var i = 0; i < allowedValues.length; i++) {        
+    for (var i = 0; i < allowedValues.length; i++) {
         if (isString && !caseSensitive) {
             if (value.toLowerCase() === allowedValues[i].toLowerCase()) {
                 return;
@@ -2728,7 +2728,7 @@ function validateAllowedValue(value, allowedValues, caseSensitive, paramName, me
         }
     }
 
-    throw createInvalidParamValue(paramName, method);    
+    throw createInvalidParamValue(paramName, method);
 }
 
 function createParamTypeError(paramName, method) {
@@ -2824,7 +2824,7 @@ function handleAsyncCallingError(name, err) {
 
 var Promise = function (opName, op, uplinkPromise) {
     this._name = opName;
-    this._op = op; 
+    this._op = op;
     this._uplinkPromise = uplinkPromise;
     this._isCompleted = false;
     this._listeners = [];
@@ -2866,7 +2866,7 @@ Promise.prototype = {
     },
 
     _getName: function () {
-        
+
         if (this._name) {
             return this._name;
         }
@@ -2896,12 +2896,12 @@ Promise.prototype = {
                 chainedPromise = listener.chainedPromise,
                 isPromiseCompleted = (event !== PROMISE_EVENT_ONPROGRESS);
 
-            if (callback) {                
+            if (callback) {
                 try {
                     var chainedPromiseOrigin = callback.apply(listener, args);
                     if (isPromiseCompleted && chainedPromiseOrigin && chainedPromiseOrigin.then) {
                         // We need to link and fulfill the chained promise with the one returned from callback
-                        // if this is onSuccess or onError. 
+                        // if this is onSuccess or onError.
                         // Also, set the new promise as the _op of the chained promise in case cancel is invoked.
                         chainedPromise._op = chainedPromiseOrigin;
                         chainedPromiseOrigin.then(
@@ -2998,7 +2998,7 @@ var DOM_ATTR_CLIENTID = "client-id",
     DOM_FILE = "file",
     DOM_EVENT_CLICK = "click",
     DOM_ID_SDK = "onedrive-js";
-    
+
 
 
 /**
@@ -3073,13 +3073,13 @@ var IMETHOD_ONEDRIVE_OPEN = "OneDrive.open",
     IMETHOD_ONEDRIVE_SAVE = "OneDrive.save",
     IMETHOD_ONEDRIVE_CREATEBUTTON_OPEN = "OneDrive.createOpenButton",
     IMETHOD_ONEDRIVE_CREATEBUTTON_SAVE = "OneDrive.createSaveButton";
-   
+
 /**
  * SkyDrive url parameters and values.
  */
 var FILEDIALOG_PARAM_AUTH = "auth",
     FILEDIALOG_PARAM_AUTH_RPS = "rps",
-    FILEDIALOG_PARAM_AUTH_OAUTH = "oauth", 
+    FILEDIALOG_PARAM_AUTH_OAUTH = "oauth",
     FILEDIALOG_PARAM_VIEWTYPE = "v",
     FILEDIALOG_PARAM_VIEWTYPE_FOLDERPICKER = "1",
     FILEDIALOG_PARAM_VIEWTYPE_FILEPICKER = "2",
@@ -3099,7 +3099,7 @@ var KEYCODE_ESC = 27;
 
 WL.init = function (properties) {
     /// <summary>
-    /// Initializes the JavaScript library. An application must call this function before making other function calls to 
+    /// Initializes the JavaScript library. An application must call this function before making other function calls to
     /// the library except for subscribing/unsubscribing to events.
     /// </summary>
     /// <param name="properties" type="Object">
@@ -3108,23 +3108,23 @@ WL.init = function (properties) {
     /// &#10; scope:  Optional. The scope values used to determine if the user has logged in.
     /// &#10; redirect_uri:  Optional. The default redirect URI used for OAuth authentication. The OAuth server redirects
     /// to this URI during the OAuth flow. The redirect_uri value must match the redirect domain of the registered app.
-    /// &#10; response_type:  Optional. The OAuth response_type value. It can be either "code" or "token". If set to 
-    /// "token" (default), the client will receive the access token directly. If set to "code" the OAuth server will return 
-    /// an authorization code and the application server that serves the redirect_uri page should handle retrieving the 
+    /// &#10; response_type:  Optional. The OAuth response_type value. It can be either "code" or "token". If set to
+    /// "token" (default), the client will receive the access token directly. If set to "code" the OAuth server will return
+    /// an authorization code and the application server that serves the redirect_uri page should handle retrieving the
     /// access token from the OAuth server using the authorization code and client secret.
     /// &#10; refresh_type:  Optional. Indicates the way on how to check user's login status and retrieve a new access token
     /// if the user already consented the scopes required by the app. Checking login status and retrieving a new access token
     /// happens in the following scenarios: i) The library is initialized via WL.init(...); ii) WL.getLoginStatus() is invoked;
     /// iii) Sign-in control is initiaized via WL.ui(....); iv) The access token is expired. If set to 'app', the library will
-    /// send a request to the app server with address value specified in the redirect_uri parameter in WL.init(...). The app 
-    /// server should authenticate the user and retrieve the corresponding access token via the persisted refresh token of the 
-    /// user. If not specified, by default, the library will send a request to the OAuth server to perform login status checking 
+    /// send a request to the app server with address value specified in the redirect_uri parameter in WL.init(...). The app
+    /// server should authenticate the user and retrieve the corresponding access token via the persisted refresh token of the
+    /// user. If not specified, by default, the library will send a request to the OAuth server to perform login status checking
     /// and access token retrieving task. Note: to retrieve a new access token using default approach requires that i) the user
-    /// must have already signed in with Microsoft account in the current web session and ii) the user must have already consented 
-    /// 'wl.signin' scope to the app. 
+    /// must have already signed in with Microsoft account in the current web session and ii) the user must have already consented
+    /// 'wl.signin' scope to the app.
     /// &#10; logging: Optional. If set to true (default), the library logs error information to the JavaScript console and
     /// notifies the application through "wl.log" event.
-    /// &#10; status: Optional. If set to true (default), the library attempts to get the login status of the user after 
+    /// &#10; status: Optional. If set to true (default), the library attempts to get the login status of the user after
     /// WL.init is invoked.
     /// &#10; secure_cookie: Optional. If set to true (default), the library will specify secure attribute when writing the
     /// cookie on an https page.
@@ -3174,12 +3174,12 @@ WL.login = function (properties, callback) {
     /// <summary>
     /// Signs the user in or expands the user's permission set. This function can result in launching the consent
     /// page popup. Therefore, it should only be called in response to a user action such as clicking a button.
-    /// Otherwise, the web browser may block the popup. This is an async method that returns a Promise object 
+    /// Otherwise, the web browser may block the popup. This is an async method that returns a Promise object
     /// that allows you to attach events to handle succeeded or failed situations.
     /// </summary>
     /// <param name="properties" type="Object">
     /// Required. A JSON object with the following properties:
-    /// &#10; redirect_uri: Optional. By default, the redirect_uri parameter supplied to WL.init is used. 
+    /// &#10; redirect_uri: Optional. By default, the redirect_uri parameter supplied to WL.init is used.
     /// An application can override it for specific scenarios with this parameter.
     /// &#10; scope: Required. The scopes for the user to authorize. It can be an array
     /// of scope string values or a string value of multiple scopes delimited by a space character.
@@ -3214,7 +3214,7 @@ WL.login = function (properties, callback) {
 
 WL.download = function (properties, callback) {
     /// <summary>
-    /// Makes a call to download a file from SkyDrive. This is an async method that returns a Promise object that 
+    /// Makes a call to download a file from SkyDrive. This is an async method that returns a Promise object that
     /// allows you to attach events to handle succeeded and failed situations.
     /// </summary>
     /// <param name="properties" type="Object">Required. A JSON object containing the properties for downloading a file:
@@ -3242,11 +3242,11 @@ WL.upload = function (properties, callback) {
     /// <param name="properties" type="Object">Required. A JSON object containing the properties for uploading a file:
     /// &#10; path: Required. The path to the file to download.
     /// &#10; element: Required. The DOM element or "id" value of a file input tag.
-    /// &#10; overwrite: Indicates if the uploading action should overwrite a file that already exists. This only applies to when 
+    /// &#10; overwrite: Indicates if the uploading action should overwrite a file that already exists. This only applies to when
     /// uploading to a folder. Suported values include "true", "false", "rename", true, false.
     /// </param>
     /// <param name="callback" type="Function">Optional. A callback function that is invoked when the upload call is complete.</param>
-    /// <returns type="Promise" mayBeNull="false" >The Promise object that allows you to attach events to handle succeeded and failed 
+    /// <returns type="Promise" mayBeNull="false" >The Promise object that allows you to attach events to handle succeeded and failed
     /// situations.</returns>
 
     try {
@@ -3271,28 +3271,28 @@ WL.ui = function (properties, callback) {
     /// &#10; brand: Optional. Defines the brand, or type of icon, used with the signin control. It can be one of the following
     /// values: "hotmail", "messenger", "windows"(default), "skydrive", or "none".
     /// &#10; theme: Optional. The options are "blue" (default) and "white".
-    /// &#10; type: Optional. Defines the type of the sign-in control. It can be one of the following values: "signin" (default),  
-    /// "login", "connect", or "custom". 
+    /// &#10; type: Optional. Defines the type of the sign-in control. It can be one of the following values: "signin" (default),
+    /// "login", "connect", or "custom".
     /// &#10; sign_in_text: If the type value is "custom", defines the signin text displayed in the sign-in control.
     /// &#10; sign_out_text: If the type value is "custom", defines the sign out text displayed in the sign-in control.
-    /// &#10; state: Optional. This parameter can be used to track the caller state at the app server side if you 
+    /// &#10; state: Optional. This parameter can be used to track the caller state at the app server side if you
     /// choose to implement a server flow authentication.
     /// &#10; onloggedin: Optional. A callback function that will be invoked when the user is logged in.
     /// &#10; onloggedout: Optional. A callback function that will be invoked when the user is logged out.
     /// &#10; onerror: Optional. A callback funtion that will be invoked when there is error during logging in.
-    /// &#10; 
+    /// &#10;
     /// &#10; SkyDrive picker properties:
-    /// &#10; theme: Optional. The options are "blue" and "white" (default). 
+    /// &#10; theme: Optional. The options are "blue" and "white" (default).
     /// &#10; mode: Required. Specify the mode of the dialog to open. It can be either "open" or "save". If it is "open", the dialog
     /// will be an open picker dialog that allows the user to select file(s). If it is "save", the dialog will be a save picker dialog
     /// that allows the user to select a folder.
-    /// &#10; select: Optional. This is only used when mode value is "open" to specify if multiple files are allowed to be selected. 
+    /// &#10; select: Optional. This is only used when mode value is "open" to specify if multiple files are allowed to be selected.
     /// It can be either "single" (default) or "multi".
     /// &#10; lightbox: Optional. Specifies the dialog lightbox color. It can be either "white" (default), "grey" or "transparent".
     /// &#10; onselected: Required. A callback function that will be invoked when the user has selected SkyDrive items successfully.
     /// &#10; onerror: Optional. A callback function that will be invoked when the picker dialog is closed with no SkyDrive selected.
-    /// &#10; loading_timeout: Optional. Specifies number of seconds as a timeout value for loading the SkyDrive picker. If the specified has time passed and 
-    /// the picker dialog has not been loaded properly, the picker will be disposed and the failure event callback will be invoked. If this parameter is not 
+    /// &#10; loading_timeout: Optional. Specifies number of seconds as a timeout value for loading the SkyDrive picker. If the specified has time passed and
+    /// the picker dialog has not been loaded properly, the picker will be disposed and the failure event callback will be invoked. If this parameter is not
     /// specified, the timeout behavior will be disabled.
     /// </param>
     /// <param name="callback" type="Function">Optional. A callback function that is invoked when the UI element is rendered.</param>
@@ -3321,13 +3321,13 @@ WL.fileDialog = function (properties, callback) {
     /// This is an async method that returns a Promise object that allows you to attach events to handle succeeded or failed situations.
     /// </summary>
     /// <param name="properties" type="Object" optional="false">Required. A JSON object containing properties for showing the dialog.
-    /// &#10; mode: Required. Specify the mode of the dialog to open. It can be either "open" or "save". If it is "open", the dialog will be an open picker 
+    /// &#10; mode: Required. Specify the mode of the dialog to open. It can be either "open" or "save". If it is "open", the dialog will be an open picker
     /// &#10; dialog that allows the user to select file(s). If it is "save", the dialog will be a save picker dialog that allows the user to select a folder.
-    /// &#10; select: Optional. This is only used when mode value is "open" to specify if multiple files are allowed to be selected. It can be either "single" 
+    /// &#10; select: Optional. This is only used when mode value is "open" to specify if multiple files are allowed to be selected. It can be either "single"
     /// &#10; (default) or "multi".
     /// &#10; lightbox: Optional. Specifies the dialog lightbox color. It can be either "white" (default), "grey" or "transparent".
-    /// &#10; loading_timeout: Optional. Specifies number of seconds as a timeout value for loading the SkyDrive picker. If the specified time has passed and 
-    /// the picker dialog has not been loaded properly, the picker will be disposed and the failure event callback will be invoked. If this parameter is not 
+    /// &#10; loading_timeout: Optional. Specifies number of seconds as a timeout value for loading the SkyDrive picker. If the specified time has passed and
+    /// the picker dialog has not been loaded properly, the picker will be disposed and the failure event callback will be invoked. If this parameter is not
     /// specified, the timeout behavior will be disabled.
     /// </param>
     /// <param name="callback" type="Function" optional="true">Optional. A callback function that is invoked when the file dialog is closed.</param>
@@ -3388,7 +3388,7 @@ function validateFileDialogCall(args, method) {
 
     if (!ChannelManager.isSupported() || !window.JSON || wl_app._browser.mobile) {
         throw new Error(ERROR_DESC_BROWSER_LIMIT);
-    }    
+    }
 }
 
 /**
@@ -3578,7 +3578,7 @@ function handleUploadRedirect(id, result) {
 /**
  * The Web version of appInitPlatformSpecific() method.
  */
-function appInitPlatformSpecific(properties) {          
+function appInitPlatformSpecific(properties) {
     wl_app._authScope = normalizeScopeValue(properties[AK_SCOPE]);
     wl_app._secureCookie = normalizeBooleanValue(properties[AK_SECURE_COOKIE]);
     wl_app._redirect_uri = normalizeRedirectUrl(properties[AK_REDIRECT_URI], IMETHOD_WL_INIT);
@@ -3660,13 +3660,13 @@ function createLoginStatusRequest(properties, onGetLoginStatusCompleted) {
     return new AuthRequest(AUTH_REQUEST_LOGINSTATUS, properties, onGetLoginStatusCompleted);
 }
 
-/** 
+/**
  * This method will do:
  *  1) show consent UI if the current session does not have required scope.
  *  2) refresh the access_token, if its valid period is smaller than what's required.
  */
 wl_app.ensurePermission = function (scope, validTime, method, callback) {
-    var permissionError = createErrorResponse(ERROR_ACCESS_DENIED, 
+    var permissionError = createErrorResponse(ERROR_ACCESS_DENIED,
                                               ERROR_DESC_ACCESS_DENIED.replace("METHOD", method));
     wl_app.login({ scope: scope }).then(
         function (resp) {
@@ -3702,7 +3702,7 @@ wl_app.ensurePermission = function (scope, validTime, method, callback) {
         }
     );
 };
-    
+
 
 wl_app.canLogout = function () {
     return true;
@@ -3763,7 +3763,7 @@ var SignInControl = function (properties) {
 
     var signInControlInit = createDelegate(control, control.init);
 
-    checkDocumentReady(signInControlInit);    
+    checkDocumentReady(signInControlInit);
 };
 
 SignInControl.prototype = {
@@ -4183,7 +4183,7 @@ function buildSkyDrivePickerControlStyle(properties, button)
     var themeWhite = properties[UI_PARAM_THEME] === UI_SIGNIN_THEME_WHITE,
         locale = wl_app._locale,
         rtl = (locale.indexOf("ar") > -1 || locale.indexOf("he") > -1),
-        direction = rtl ? "RTL" : "LTR",      
+        direction = rtl ? "RTL" : "LTR",
         img = button.childNodes[0],
         text = button.childNodes[1],
         blueCode = "#094AB2",
@@ -4216,7 +4216,7 @@ function buildSkyDrivePickerControlStyle(properties, button)
 }
 
 function buildSkyDrivePickerControlHtml(properties) {
-    var button = buildSkyDrivePickerControlInnerHtml(properties, false /* old picker */);   
+    var button = buildSkyDrivePickerControlInnerHtml(properties, false /* old picker */);
     return "<button id='" + button.buttonId + "' title='" + button.buttonTitle + "'>" + button.innerHtml + "</button>";
 }
 
@@ -4254,7 +4254,7 @@ function attachControlMouseEvents(container, onClick, onRender) {
     }
 
     if (onRender) {
-        var mouseDown = false, mouseIn = false;    
+        var mouseDown = false, mouseIn = false;
         var onMouseEnter = function (e) {
             mouseIn = true;
             onMouseRender(e);
@@ -4404,7 +4404,7 @@ CookieState.prototype = {
         setCookie(
             this._cookieName,
             serializeParameters(this._states),
-            getCookieDomain(),  // store in the right domain 
+            getCookieDomain(),  // store in the right domain
             null); // secondsToExpiry: set as session cookie.
     },
 
@@ -4447,7 +4447,7 @@ CookieState.prototype = {
     }
 };
 
-/** 
+/**
  * The Web version of getCookieDomain() method.
  */
 function getCookieDomain() {
@@ -4465,7 +4465,7 @@ var AuthRequest = function (method, properties, callback) {
     request._callback = callback;
     request._authMonitor = createDelegate(request, request._onAuthChanged);
 
-    request.execute = (request._method == AUTH_REQUEST_LOGIN) ? request._login : request._getLoginStatus;    
+    request.execute = (request._method == AUTH_REQUEST_LOGIN) ? request._login : request._getLoginStatus;
 };
 
 AuthRequest.prototype = {
@@ -5115,7 +5115,7 @@ function sendAPIRequestViaJSONP(request) {
 
     params[API_PARAM_CALLBACK] = API_JSONP_CALLBACK_NAMESPACE_PREFIX + callbackName;
     params[API_SUPPRESS_REDIRECTS] = "true";
-    
+
     var url = appendUrlParameters(request._url, params);
     if (url.length > API_JSONP_URL_LIMIT) {
         return false;
@@ -5127,7 +5127,7 @@ function sendAPIRequestViaJSONP(request) {
         cleanupJSONPRequest(callbackName, scriptTag);
         request.onCompleted(json);
     };
-    
+
     attachScriptEvents(scriptTag, request);
 
     scriptTag.setAttribute("async", "async");
@@ -5151,21 +5151,21 @@ function sendAPIRequestViaJSONP(request) {
 function attachScriptEvents(element, request) {
     if (wl_app._browser.ie && element.attachEvent) {
         element.attachEvent("onreadystatechange", function (e) {
-            onScriptLoaded(e, request); 
+            onScriptLoaded(e, request);
         });
     }
     else {
         element.readyState = "complete";
         element.addEventListener(
-            "load", 
+            "load",
             function (e) {
-                onScriptLoaded(e, request); 
+                onScriptLoaded(e, request);
             },
             false);
         element.addEventListener(
             "error",
             function (e) {
-                onScriptLoaded(e, request); 
+                onScriptLoaded(e, request);
             },
             false);
     }
@@ -5333,7 +5333,7 @@ var flashObjectHtmlTemplate =
 "</object>";
 
 var FilePickerOperation = null;
-(function () { 
+(function () {
     wl_app.fileDialog = function (args) {
         ensureAppInited(args[API_INTERFACE_METHOD]);
 
@@ -5353,7 +5353,7 @@ var FilePickerOperation = null;
         var op = this;
         op._props = properties;
         op._startTs = new Date().getTime();
-        
+
         // Set default values.
         properties[FILEDIALOG_PARAM_LIGHTBOX] = properties[FILEDIALOG_PARAM_LIGHTBOX] || FILEDIALOG_PARAM_LIGHTBOX_WHITE;
         properties[FILEDIALOG_PARAM_SELECT] = properties[FILEDIALOG_PARAM_SELECT] || FILEDIALOG_PARAM_SELECT_SINGLE;
@@ -5373,7 +5373,7 @@ var FilePickerOperation = null;
         },
 
         cancel: function(error) {
-            // cancel 
+            // cancel
             var op = this,
                 props = op._props;
 
@@ -5454,9 +5454,9 @@ var FilePickerOperation = null;
 
                 if (isExternalFlow)
                 {
-                    wl_app.login({ 
+                    wl_app.login({
                         scope: scope,
-                        external_consent: true 
+                        external_consent: true
                     }).then(
                         function(resp) {
                             // Success
@@ -5476,7 +5476,7 @@ var FilePickerOperation = null;
 
         _buildExternalScope: function () {
             var op = this;
-            var scope = "onedrive_onetime.access:"; 
+            var scope = "onedrive_onetime.access:";
             switch (op._props[FILEDIALOG_PARAM_MODE]) {
                 case FILEDIALOG_PARAM_MODE_READ:
                     scope += "read";
@@ -5831,7 +5831,7 @@ var FilePickerOperation = null;
 
         if (pickerScript.charAt(0) === '/') {
             // SkyDrive does not accept url begining with "//", so we need to ensure the Url starts with "https".
-            // Assuming the url is a not a relative path, we only check '/'. 
+            // Assuming the url is a not a relative path, we only check '/'.
             pickerScript = SCHEME_HTTPS + pickerScript;
         }
 
@@ -5839,12 +5839,12 @@ var FilePickerOperation = null;
         params[FILEDIALOG_PARAM_AUTH] = wl_app._rpsAuth ? FILEDIALOG_PARAM_AUTH_RPS : FILEDIALOG_PARAM_AUTH_OAUTH;
         params[FILEDIALOG_PARAM_DOMAIN] = window.location.hostname.toLowerCase();
         params[FILEDIALOG_PARAM_LIVESDK] = pickerScript;
-        params[AK_CLIENT_ID] = wl_app._appId;        
+        params[AK_CLIENT_ID] = wl_app._appId;
         params[AK_REQUEST_TS] = new Date().getTime();
         params[FILEDIALOG_PARAM_MKT] = wl_app._locale;
 
         if (!wl_app._rpsAuth) {
-            params[AK_ACCESS_TOKEN] = props[AK_ACCESS_TOKEN];        
+            params[AK_ACCESS_TOKEN] = props[AK_ACCESS_TOKEN];
         }
 
         if (isOpenPicker) {
@@ -5853,7 +5853,7 @@ var FilePickerOperation = null;
 
         return appendUrlParameters(wl_app[WL_SKYDRIVE_URI], params);
     }
-    
+
     function computePopoverPosition(width, height) {
         var left, top;
         if (wl_app._browser.ie) {
@@ -5901,25 +5901,25 @@ UploadOperation.prototype._getStrategy = function (properties) {
     if (!(element instanceof HTMLInputElement) ||
         element.type !== DOM_FILE) {
         throw createInvalidParamValue(
-                API_PARAM_ELEMENT, 
-                interfaceMethod, 
+                API_PARAM_ELEMENT,
+                interfaceMethod,
                 "It must be an HTMLInputElement with its type attribute set to\"file\" (i.e., <input type=\"file\" />).");
     }
 
     // The element must have a file selected (i.e., value must not be empty).
     if (element.value === "") {
         throw createInvalidParamValue(
-                API_PARAM_ELEMENT, 
-                interfaceMethod, 
+                API_PARAM_ELEMENT,
+                interfaceMethod,
                 "It did not contain a selected file.");
     }
 
-    // if the input element has a files property and there is FileReader type available, then the browser supports 
+    // if the input element has a files property and there is FileReader type available, then the browser supports
     // the file API and we will use that.
     if (element.files && window.FileReader) {
         if (element.files.length !== 1) {
             throw createInvalidParamValue(
-                    API_PARAM_ELEMENT, 
+                    API_PARAM_ELEMENT,
                     interfaceMethod,
                     "It must contain one selected file.");
         }
@@ -5987,7 +5987,7 @@ MultiPartFormUploadStrategy.prototype = {
 
         return self._uploadIFrame.id;
     },
-    
+
     setUploadTimeout: function() {
         var self = this;
         self._uploadTimeoutId =
@@ -6044,7 +6044,7 @@ MultiPartFormUploadStrategy.prototype = {
      * Builds the request url from the path. Adds all necessary
      * query parameters.
      */
-    _getRequestUrl: function(path) {        
+    _getRequestUrl: function(path) {
         var params = {};
         params[AK_REDIRECT_URI] = wl_app._redirect_uri;
 
@@ -6056,7 +6056,7 @@ MultiPartFormUploadStrategy.prototype = {
         state[REDIRECT_TYPE] = REDIRECT_TYPE_UPLOAD;
         state[UPLOAD_STATE_ID] = this.getId();
         params[AK_STATE] = serializeParameters(state);
-        
+
         return appendUrlParameters(path, params);
     },
 
@@ -6244,7 +6244,7 @@ function XhrUploadStrategy(operation, uploadSource) {
 
         reader.onerror = function(evt) {
             error = evt.target.error;
-            operation.onErr(error.name); // TODO: name? 
+            operation.onErr(error.name); // TODO: name?
         };
 
         reader.onload = function(evt) {
@@ -6283,13 +6283,13 @@ function XhrUploadStrategy(operation, uploadSource) {
 };
 
 function detectSecureConnection() {
-    wl_app._isHttps = document.location.protocol.toLowerCase() == SCHEME_HTTPS;    
+    wl_app._isHttps = document.location.protocol.toLowerCase() == SCHEME_HTTPS;
 }
 
 function detectFlash() {
     if (wl_app._browser.flash !== undefined)
         return;
-    
+
     var version = 0;
     try {
         if (wl_app._browser.ie) {
@@ -6314,7 +6314,7 @@ function detectFlash() {
     }
 
     wl_app._browser.flashVersion = version;
-    wl_app._browser.flash = (version >= 8);    
+    wl_app._browser.flash = (version >= 8);
 }
 
 function onDocumentReady() {
@@ -6328,11 +6328,11 @@ function onCreateIframeReady(createIframe) {
         if (wl_app._browser.firefox &&
             (!(wl_app._documentReady) || ((new Date().getTime() - wl_app._documentReady) < 1000))) {
             // In Firefox, iframe loading will not going out and return cached content if loading too early.
-            // For a simple page, 1 millisecond may be adequate. For a complex page, it takes a bit longer. 
+            // For a simple page, 1 millisecond may be adequate. For a complex page, it takes a bit longer.
             window.setTimeout(createIframe, 1000);
         }
         else {
-            createIframe();            
+            createIframe();
         }
     });
 }
@@ -6409,7 +6409,7 @@ function getClientIdFromDOM()
 {
     var element = getElementById(DOM_ID_SDK);
     if (element)
-    {    
+    {
         var id = element.getAttribute(DOM_ATTR_CLIENTID);
         !id && logError(stringFormat("Could not find attribute '{0}' on element with id '{1}'.", DOM_ATTR_CLIENTID, DOM_ID_SDK), ONEDRIVE_PREFIX);
 
@@ -6688,7 +6688,7 @@ function readPostMessage(e) {
         !stringIsNullOrEmpty(e.data) &&
         e.source != null) {
 
-        msg = decodePostMessage(e.data);        
+        msg = decodePostMessage(e.data);
     }
 
     return msg;
@@ -6721,12 +6721,12 @@ function encodeChannelMessage(command, args) {
         cmd: command,
         args: args
     };
-    
+
     return JSON.stringify(message);
 }
 
 function decodeChannelMessage(text) {
-    // JSON is available in IE8 above and other modern browsers. 
+    // JSON is available in IE8 above and other modern browsers.
     // So, we can rely on browser native JSON support.
     var message = JSON.parse(text);
     return message;
@@ -6744,14 +6744,14 @@ else {
     };
 }
 
-var 
+var
 //! Copyright (c) Microsoft Corporation. All rights reserved.
 
 
 ////////////////////////////////////////////////////////////////////////////////
 // WLText
 
-WLText = { 
+WLText = {
     connect: 'Connect',
     signIn: 'Sign in',
     signOut: 'Sign out',
@@ -6826,7 +6826,7 @@ bvtSettings[WL_SKYDRIVE_URI] = "https://onedrive-bvt.live-int.com/";
 bvtSettings[WL_SDK_ROOT] = "//bvt-js.live-int.net/v5.0/";
 bvtSettings[ONEDRIVE_API] = "https://newapi.users.storage.live-int.com/";
 
-wl_app._settings = 
+wl_app._settings =
 {
     PROD: prodSettings,
     DF: dfSettings,
@@ -6843,7 +6843,7 @@ wl_app._settings =
     }
 };
 
-wl_app._settings.init("INT");
+wl_app._settings.init("PROD");
 
 
 wl_app[FILEDIALOG_PARAM_PICKER_SCRIPT] = "wl.skydrivepicker.debug.js";
