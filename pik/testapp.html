@@ -1,12 +1,12 @@
 <html>
 	<head>
 		<title>Test page for LiveConnectSDK.</title>
-		<script id="onedrive-js" type="text/javascript" src="/OneDrive.debug.js" client-id="000000004812DC2E"></script>
+		<script id="onedrive-js" type="text/javascript" src="OneDrive.debug.js" client-id="000000004812DC2E"></script>
 		<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.js"></script>
 		<style type="text/css">
             .button {
 		        color: white;
-		        display: inline-block; 
+		        display: inline-block;
 		        width: 100px;
 		        text-align: center;
 		        padding: 2px 5px;
@@ -39,7 +39,7 @@
             	padding: 2px 5px;
 		        margin: 0px 10px;
             }
-          </style> 
+          </style>
 	</head>
 	<div id="login" class="button button-orange">Login</div>
 	<div id="uploadfile" class="button_padding">Upload</div>
@@ -52,7 +52,7 @@
 	<div id="JsOutputDiv"></div>
 	<script>
 		window.onload = function(){
-			$("#login").click(function(){				
+			$("#login").click(function(){
 				openFromSkyDrive();
 			});
 
@@ -138,7 +138,7 @@
 			            log("WL.fileDialog errorResponse = " + JSON.stringify(errorResponse));
 			        }
 			    );
-			}	
+			}
 
 			function log(message) {
 			    var child = document.createTextNode(message);
@@ -166,8 +166,8 @@
 			        overwrite: "rename"
 			    }).then(
 			        function (response) {
-			            document.getElementById("JsOutputDiv").innerText = 
-			                "File uploaded."; 
+			            document.getElementById("JsOutputDiv").innerText =
+			                "File uploaded.";
 			        },
 			        function (responseFailed) {
 			            document.getElementById("JsOutputDiv").innerText =
@@ -178,7 +178,7 @@
 
 			function onUploadFileError(response) {
 			    document.getElementById("JsOutputDiv").innerText =
-			        "Error getting folder info: " + response.error.message; 
+			        "Error getting folder info: " + response.error.message;
 			}
 
 			/* open */
@@ -219,4 +219,3 @@
 		};
 	</script>
 </html>
-
