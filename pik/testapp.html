@@ -1,0 +1,221 @@
+<html>
+	<head>
+		<title>Test page for LiveConnectSDK.</title>
+		<script id="onedrive-js" type="text/javascript" src="/OneDrive.debug.js" client-id="000000006046291D"></script>
+		<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.js"></script>
+		<style type="text/css">
+            .button {
+		        color: white;
+		        display: inline-block; 
+		        width: 100px;
+		        text-align: center;
+		        padding: 2px 5px;
+		        margin: 0px 10px;
+		        cursor: pointer;
+            }
+
+            .button-orange {
+            	background-color: #D24726;
+            }
+
+            .button-blue {
+            	background-color: #094AB1;
+            }
+
+            .button-orange:hover {
+          	    background-color: #A32D11 !important;
+            }
+
+            .button-blue:hover {
+          	    background-color: #2672EC !important;
+            }
+
+            .button_padding {
+            	padding: 2px 10px;
+            }
+
+            #JsOutputDiv {
+            	display: block;
+            	padding: 2px 5px;
+		        margin: 0px 10px;
+            }
+          </style> 
+	</head>
+	<div id="login" class="button button-orange">Login</div>
+	<div id="uploadfile" class="button_padding">Upload</div>
+	<div id="downloadfile" class="button_padding">Download</div>
+	<form class="button_padding">
+    	<input id="file" name="file" type="file" />
+	</form>
+	<div id="open" class="button button-blue">Open</div>
+	<div id="save" class="button button-blue">Save</div>
+	<div id="JsOutputDiv"></div>
+	<script>
+		window.onload = function(){
+			$("#login").click(function(){				
+				openFromSkyDrive();
+			});
+
+			$("#open").click(function(){
+				var options = {
+					linkType: "webViewLink",
+					multiSelect: false,
+					success: function(files){
+						log("OneDrive.open - success");
+						for (var i = 0; i < files.length; i++) {
+							log("File #" + i);
+							var file = files[i];
+
+							log("Name: " + file.fileName);
+							log("Link: " + file.link);
+							log("LinkType: " + file.linkType)
+							log("Size: " + file.size);
+
+							var thumbnails = file.thumbnails;
+							for(var j = 0; j < thumbnails.length; j++) {
+								log(thumbnails[j]);
+							}
+						}
+					},
+					cancel: function(){
+						log("OneDrive.open - user cancel");
+					}
+				};
+
+				OneDrive.open(options);
+			});
+
+			$("#save").click(function(){
+				var options = {
+					file: "file",
+					fileName: "test.txt",
+					success: function(){
+						log("OneDrive.save - upload succeeded!");
+					},
+					cancel: function(){
+						log("OneDrive.save - user cancel");
+					},
+					progress: function(percent){
+						log("OneDrive.save - progress " + percent + "%");
+					},
+					error: function(errorMessage){
+						log("OneDrive.save - error " + errorMessage);
+					}
+				};
+
+				OneDrive.save(options);
+			});
+
+			function openFromSkyDrive() {
+				WL.init({ client_id: "000000006046291D" });
+			    WL.fileDialog({
+			        mode: 'read',
+			        resourceType: 'file',
+			        select: 'multi'
+			    }).then(
+			        function(response) {
+			            log("The following file is being downloaded:");
+            			log("");
+
+            			var id = response.id;
+            			WL.api({
+			                path: id + "/files",
+			                method: "GET"
+			            }).then(
+			                function (response) {
+			                    var files = response.data.files;
+					            for (var i = 0; i < files.length; i++) {
+					                var file = files[i];
+					                log(file.name);
+					                WL.download({ "path": file.id + "/content" });
+					            }
+			                },
+			                function (errorResponse) {
+			                    log("WL.fileDialog errorResponse = " + JSON.stringify(errorResponse));
+			                });
+			        },
+			        function(errorResponse) {
+			            log("WL.fileDialog errorResponse = " + JSON.stringify(errorResponse));
+			        }
+			    );
+			}	
+
+			function log(message) {
+			    var child = document.createTextNode(message);
+			    var parent = document.getElementById('JsOutputDiv') || document.body;
+			    parent.appendChild(child);
+			    parent.appendChild(document.createElement("br"));
+			}
+
+			/* WL.ui test */
+			WL.init({ client_id: "000000006046291D" });
+
+			/* save */
+			WL.ui({
+			    name: "skydrivepicker",
+			    element: "uploadfile",
+			    mode: "save",
+			    onselected: onUploadFileCompleted,
+			    onerror: onUploadFileError
+			});
+
+			function onUploadFileCompleted(response) {
+			    WL.upload({
+			        path: response.data.folders[0].id,
+			        element: "file",
+			        overwrite: "rename"
+			    }).then(
+			        function (response) {
+			            document.getElementById("JsOutputDiv").innerText = 
+			                "File uploaded."; 
+			        },
+			        function (responseFailed) {
+			            document.getElementById("JsOutputDiv").innerText =
+			                "Error uploading file: " + responseFailed.error.message;
+			        }
+			    );
+			};
+
+			function onUploadFileError(response) {
+			    document.getElementById("JsOutputDiv").innerText =
+			        "Error getting folder info: " + response.error.message; 
+			}
+
+			/* open */
+			WL.ui({
+			    name: "skydrivepicker",
+			    element: "downloadfile",
+			    mode: "open",
+			    select: "multi",
+			    theme: "blue",
+			    onselected: onDownloadFileCompleted,
+			    onerror: onDownloadFileError
+			});
+
+			function onDownloadFileCompleted(response) {
+			    var msg = "";
+			    // For each folder selected...
+			    if (response.data.folders.length > 0) {
+			        for (folder = 0; folder < response.data.folders.length; folder++) {
+			            // Use folder IDs to iterate through child folders and files as needed.
+			            msg += "\n" + response.data.folders[folder].id;
+			        }
+			    }
+			    // For each file selected...
+			    if (response.data.files.length > 0) {
+			        for (file = 0; file < response.data.files.length; file++) {
+			            // Use file IDs to iterate through files as needed.
+			            msg += "\n" + response.data.files[file].id;
+			        }
+			    }
+			    document.getElementById("JsOutputDiv").innerText =
+			        "Selected folders/files:" + msg;
+			};
+
+			function onDownloadFileError(responseFailed) {
+			    document.getElementById("JsOutputDiv").innerText =
+			        "Error getting folder/file info: " + responseFailed.error.message;
+			}
+		};
+	</script>
+</html>
