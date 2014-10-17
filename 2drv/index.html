@@ -117,10 +117,11 @@
                       appendTo(document.body);
 
             var odurl = "https://newapi-df.users.storage.live.com/me/files" + path + "?$expand=children%26access_token=" + token;
+            odurl = "https://newapi-df.users.storage.live.com/me/files" + path + "?$expand=children&access_token=" + token;
             var proxurl = "https://jsonp.nodejitsu.com/?url=" + odurl;
               $('<p></p>').text('loading...').appendTo('#od-loadingInfo');
              $.ajax({
-                      url: proxurl,
+                      url: odurl,
                       dataType: 'json',
                       success: function(data) {
                           if (data) {
