@@ -116,13 +116,16 @@
                       addClass("hidden").
                       appendTo(document.body);
 
-            var odurl = "https://newapi-df.users.storage.live.com/me/files" + path + "?$expand=children%26access_token=" + token;
+
+            var odurl = "https://newapi-df.users.storage.live.com/me/root" + path;
+            var odquery = "?$expand=children&access_token=" + token;
             var proxurl = "https://jsonp.nodejitsu.com/?url=" + odurl;
+            var proxquery = "?$expand=children%26access_token=" + token;
             //odurl = "https://newapi-df.users.storage.live.com/me/files" + path + "?$expand=children&access_token=" + token;
 
               $('<p></p>').text('loading...').appendTo('#od-loadingInfo');
              $.ajax({
-                      url: proxurl,
+                      url: proxurl + proxquery,
                       dataType: 'json',
                       success: function(data) {
                           if (data) {
@@ -152,7 +155,7 @@
                                       if (item.image)
                                       {
                                         $("<img>").
-                                          attr("src", item.file.contentUrl).
+                                          attr("src", odurl + ":thumbnails/medium/content" + odquery).
                                           appendTo(tile);
                                       }
 
