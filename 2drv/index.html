@@ -159,12 +159,14 @@
 
                                       if (item.image)
                                       {
-                                        if (item.thumbnails && item.thumbnails[1])
-                                        {
-                                          $("<img>").
-                                            attr("src", item.thumbnails[1].url).
-                                            appendTo(tile);
-                                        }
+                                        odurl + "/" encodeURIComponent(item.name) + ":thumbnails/large/content"
+
+                                        // if (item.thumbnails && item.thumbnails[1])
+                                        // {
+                                        //   $("<img>").
+                                        //     attr("src", item.thumbnails[1].url).
+                                        //     appendTo(tile);
+                                        // }
                                       }
 
                                       $("<div>").
