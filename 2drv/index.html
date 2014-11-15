@@ -120,7 +120,7 @@
             var odurl = "https://newapi-df.users.storage.live.com/me/root" + path;
             var odquery = "?$expand=children,thumbnails&access_token=" + token;
             var proxurl = "https://jsonp.nodejitsu.com/?url=" + odurl;
-            var proxquery = "?$expand=children%2cthumbnails%26access_token=" + token;
+            var proxquery = "?$expand=children%2Cthumbnails%26access_token=" + token;
             //odurl = "https://newapi-df.users.storage.live.com/me/files" + path + "?$expand=children&access_token=" + token;
 
               $('<p></p>').text('loading...').appendTo('#od-loadingInfo');
