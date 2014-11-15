@@ -159,7 +159,9 @@
 
                                       if (item.image)
                                       {
-                                        odurl + "/" encodeURIComponent(item.name) + ":thumbnails/large/content"
+                                        $("<img>").
+                                          attr("src", odurl + "/" encodeURIComponent(item.name) + ":thumbnails/large/content").
+                                          appendTo(tile);
 
                                         // if (item.thumbnails && item.thumbnails[1])
                                         // {
