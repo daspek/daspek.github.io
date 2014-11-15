@@ -135,7 +135,12 @@
 
                               $("<pre>").html(syntaxHighlight(data)).appendTo("#od-json");
 
-                                var fullPath = data.parentInfo.path + "/" + data.name;
+                                var fullPath = "";
+                                if (data.parentInfo != null)
+                                {
+                                  fullPath = data.parentInfo.path + "/" + data.name;
+                                }
+
                                 document.title = "twodrive - " + fullPath;
                                 $('<p></p>').text(fullPath).appendTo('#od-items');
                                 if (data.children && data.folder)
