@@ -118,9 +118,9 @@
 
 
             var odurl = "https://newapi-df.users.storage.live.com/me/root" + path;
-            var odquery = "?$expand=children&access_token=" + token;
+            var odquery = "?$expand=children,thumbnails&access_token=" + token;
             var proxurl = "https://jsonp.nodejitsu.com/?url=" + odurl;
-            var proxquery = "?$expand=children%26access_token=" + token;
+            var proxquery = "?$expand=children,thumbnails%26access_token=" + token;
             //odurl = "https://newapi-df.users.storage.live.com/me/files" + path + "?$expand=children&access_token=" + token;
 
               $('<p></p>').text('loading...').appendTo('#od-loadingInfo');
@@ -159,11 +159,13 @@
 
                                       if (item.image)
                                       {
-                                        $("<img>").
-                                          attr("src", odurl + ":thumbnails/medium/content").
-                                          appendTo(tile);
+                                        if (item.thumbnails && item.thumbnails[1])
+                                        {
+                                          $("<img>").
+                                            attr("src", item.thumbnails.[1].url).
+                                            appendTo(tile);
+                                        }
                                       }
-
 
                                       $("<div>").
                                         addClass("nameplate").
@@ -187,7 +189,7 @@
                                   if (data.image)
                                   {
                                     $("<img>").
-                                      attr("src", data.file.contentUrl).
+                                      attr("src", odurl + "/" + ":thumbnails/large/content").
                                       appendTo(tile);
                                   }
                                 }
