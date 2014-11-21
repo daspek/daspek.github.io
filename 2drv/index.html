@@ -163,7 +163,7 @@
                                         tile.addClass("folder");
                                       }
 
-                                      if (item.image)
+                                      if (item.image && item.thumbnails && item.thumbnails.length > 2)
                                       {
                                         $("<img>").
                                           attr("src", item.thumbnails[2].url.replace("http:","https:")).
@@ -196,7 +196,7 @@
                                     tile.addClass("folder");
                                   }
 
-                                  if (data.image)
+                                  if (data.image && data.thumbnails && data.thumbnails.length > 2)
                                   {
                                     $("<img>").
                                       attr("src", data.thumbnails[2].url.replace("http:","https:")).
