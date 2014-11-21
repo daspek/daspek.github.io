@@ -166,7 +166,7 @@
                                       if (item.image)
                                       {
                                         $("<img>").
-                                          attr("src", item.thumbnails[1].url).
+                                          attr("src", item.thumbnails[1].url.replace("http:","https:")).
                                           appendTo(tile);
 
                                         // if (item.thumbnails && item.thumbnails[1])
@@ -199,7 +199,7 @@
                                   if (data.image)
                                   {
                                     $("<img>").
-                                      attr("src", data.thumbnails[2].url).
+                                      attr("src", data.thumbnails[2].url.replace("http:","https:")).
                                       appendTo(tile);
                                   }
                                 }
