@@ -166,7 +166,7 @@
                                       if (item.image)
                                       {
                                         $("<img>").
-                                          attr("src", item.thumbnails.medium.url).
+                                          attr("src", item.thumbnails[1].url).
                                           appendTo(tile);
 
                                         // if (item.thumbnails && item.thumbnails[1])
@@ -199,7 +199,7 @@
                                   if (data.image)
                                   {
                                     $("<img>").
-                                      attr("src", data.thumbnails.large.url).
+                                      attr("src", data.thumbnails[2].url).
                                       appendTo(tile);
                                   }
                                 }
