@@ -17,6 +17,7 @@
           <div id="od-items" class="od-pagecol"></div>
           <div id="od-json" class="od-pagecol"></div>
         </div>
+        <div id="od-stats"></div>
         <script>
             WL.Event.subscribe("auth.login", onLogin);
             WL.init({
@@ -209,6 +210,9 @@
                               $('<p>error.</p>').appendTo('#od-loadingInfo');
                               $('#od-json').empty();
                           }
+
+                          $('#od-stats').empty();
+                          $('<p></p>').text('acess_token='+token).appendTo('#od-stats');
                       }
                   });
 
