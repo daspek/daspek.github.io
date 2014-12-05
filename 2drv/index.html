@@ -88,7 +88,7 @@
                     var hashIndex = document.URL.indexOf('#');
                     if (hashIndex > 0)
                     {
-                      path = document.URL.substr(hashIndex + 1);
+                      path = ":/" + document.URL.substr(hashIndex + 1) +":";
                     }
 
                     var isFile = false;
@@ -125,10 +125,10 @@
                     //   appendTo(document.body);
 
 
-            var odurl = "https://df.api.onedrive.com/drive/root:/" + path;
+            var odurl = "https://df.api.onedrive.com/drive/root" + path;
             if (!isFile)
             {
-              odurl += ":/children";
+              odurl += "/children";
             }
             var odquery = "?$expand=thumbnails&access_token=" + token;
             var proxurl = "https://jsonp.nodejitsu.com/?url=" + odurl;
