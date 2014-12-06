@@ -85,10 +85,14 @@
                 if (!session.error) {
                   (function($){
                     var path ="";
+                    var beforePath = "";
+                    var afterPath = "";
                     var hashIndex = document.URL.indexOf('#');
                     if (hashIndex > 0)
                     {
-                      path = ":" + document.URL.substr(hashIndex + 1);
+                      path = document.URL.substr(hashIndex + 1);
+                      beforePath =":";
+                      afterPath = ":";
                     }
 
                     var isFile = false;
@@ -125,7 +129,7 @@
                     //   appendTo(document.body);
 
 
-            var odurl = "https://df.api.onedrive.com/v1.0/drive/root" + path;
+            var odurl = "https://df.api.onedrive.com/v1.0/drive/root" + beforePath + path + afterPath;
             if (!isFile)
             {
               odurl += "/children";
