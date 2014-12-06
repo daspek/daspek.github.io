@@ -130,6 +130,7 @@
             {
               odurl += "/children";
             }
+
             var odquery = "?$expand=thumbnails&access_token=" + token;
             var proxurl = "https://jsonp.nodejitsu.com/?url=" + odurl;
             var proxquery = "?$expand=thumbnails%26access_token=" + token;
@@ -137,7 +138,7 @@
 
               $('<p></p>').text('loading...').appendTo('#od-loadingInfo');
              $.ajax({
-                      url: proxurl + proxquery,
+                      url: odurl + proxquery,
                       dataType: 'json',
                       success: function(data) {
                           if (data) {
