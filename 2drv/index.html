@@ -158,7 +158,7 @@
                                 var children = data.children;
                                 if (!children)
                                   children = data.value;
-                                if (children)
+                                if (children && children.length > 0)
                                 {
                                   $.each(children, function(i,item) {
                                       var tile = $("<div>").
