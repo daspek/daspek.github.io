@@ -172,18 +172,11 @@
                                         tile.addClass("folder");
                                       }
 
-                                      if (item.image && item.thumbnails && item.thumbnails.length > 2)
+                                      if (item.thumbnails && item.thumbnails.length > 0)
                                       {
                                         $("<img>").
-                                          attr("src", item.thumbnails[2].url.replace("http:","https:")).
+                                          attr("src", item.thumbnails[0].large.url).
                                           appendTo(tile);
-
-                                        // if (item.thumbnails && item.thumbnails[1])
-                                        // {
-                                        //   $("<img>").
-                                        //     attr("src", item.thumbnails[1].url).
-                                        //     appendTo(tile);
-                                        // }
                                       }
 
                                       $("<div>").
@@ -205,10 +198,10 @@
                                     tile.addClass("folder");
                                   }
 
-                                  if (data.image && data.thumbnails && data.thumbnails.length > 2)
+                                  if (data.image && data.thumbnails && data.thumbnails.length > 1)
                                   {
                                     $("<img>").
-                                      attr("src", data.thumbnails[2].url.replace("http:","https:")).
+                                      attr("src", data.thumbnails[0].large.url).
                                       appendTo(tile);
                                   }
                                 }
