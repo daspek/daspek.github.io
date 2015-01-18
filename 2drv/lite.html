@@ -1,0 +1,61 @@
+<html>
+  <head>
+      <title>2drv-lite</title>
+  </head>
+  <body>
+        <div id="fileList"/>
+        <script>
+            var token = "UNK";
+            var cookie = document.cookie;
+            if (cookie) {
+              var vars = cookie.split('&');
+              for (var i = 0; i < vars.length; i++) {
+                  var pair = vars[i].split('=');
+                  if (pair[0] == "access_token") {
+                      token = pair[1];
+                      break;
+                  }
+              }
+            }
+
+            function handleError(request)
+            {
+              alert("error: " + request.status);
+            }
+
+            var authToken = "EwB4Aq1DBAAUGCCXc8wU%2FzFu9QnLdZXy%2BYnElFkAAdkfWP54LcmuMrEyrs8xqgCtydgj5rtPBhEsD3MhNjFLm4oGDTM2Fynj0uyPssXxhjRhHXGATbaRGq52qxyI9rTviisMyhhQgohsSyV3HNAznhh%2FeoKCujyBKaSnb9UGg5BbRD0K443IF0fvZDOYd6ku0e%2BaFNyit3gHKu3rGHEPb%2FGD3QTi0Q%2FzQAGnb%2Fw3PwVS0jRRkDyTbvFOZCf19iqMgfs2%2BMK7skyIOPObVt%2F5I7RoVF3uqMdx5bVeMaf3nHQISX3YWveR3WUzcK63AxMh1VyvrZycNryiszyK88rujvdX8G3JMomuLNi6mG8jcwbv%2FL4zpxXAPinmbg6G4UUDZgAACH7nTMuD7GKpSAF%2FCehmmGS2GKuo7XcaIFBxQDBKEe3QYAFxs0%2B6MglIfYxtYvAnNLWjIjWSK26LMJ4%2FSwo9oTzpfP1GikMHNzpkdIRJecEcJfLi%2B8EC9euGP87CZCpz9rbuQpPCMnUznST4R%2F9Jr6K9YgPCW7Ly9XGQic7vfo3wXvwtX8QAAu7jrcKhQvmnXbStY9tMVtti7VCaXI7CiiUuLbcIEPH2Q%2BC5Fd%2BL%2BYodkWZQgdj8Py76pa%2BCpnoR7PtT2yoTZvmb27RzWvPk6dvo5SDHMKTRBjU9F7tRSJOs33eaiMzFr4uCNqYug1tRS5rU7o5giaX0m0HvJn87ErMoWyNyDmK79G8VZ2TA4k1SvFgseI%2BKW6Kk0sKSsoKbC9LmKaBsn8wOXVB%2FrhBDBS16FI0PttvXBDZ6rx%2BkGjO7KxP514PosLCZTXCnh0b%2FT5uAWwE%3D";
+
+            var url = "https://api.onedrive.com/v1.0/drive/root?expand=children";
+
+            var request = new XMLHttpRequest();
+            request.open("GET", url, null);
+            request.setRequestHeader("Authorization", "bearer " + authToken);
+            request.send();
+            if (request.responseText) {
+              var response = JSON.parse(request.responseText);
+              if (!response || response.error) {
+                handleError(request);
+              } else {
+                var ownerName = response.createdBy.user.displayName;
+                var header = document.createElement('h3');
+                header.innerText = ownerName + "\'s files";
+                document.body.appendChild(header);
+                document.body.appendChild(document.createElement('br'));
+                
+                if (response.children) {
+                  for (var i = 0; i < response.children.length; i++) {
+                    var item = response.children[i];
+                    var a = document.createElement('a');
+                    a.href = item.webUrl;
+                    a.innerText = item.name;
+                    document.body.appendChild(a);
+                    document.body.appendChild(document.createElement('br'));
+                  }
+                }
+              }
+            } else {
+              handleError(request);
+            }
+        </script>
+  </body>
+</html>
