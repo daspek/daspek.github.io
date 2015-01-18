@@ -28,7 +28,7 @@
             var url = "https://api.onedrive.com/v1.0/drive/root?expand=children";
 
             var request = new XMLHttpRequest();
-            request.open("GET", url, null);
+            request.open("GET", url, false /*async*/);
             request.setRequestHeader("Authorization", "bearer " + authToken);
             request.send();
             if (request.responseText) {
