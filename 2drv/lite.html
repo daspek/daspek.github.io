@@ -33,9 +33,7 @@
             request.send();
             if (request.responseText) {
               var response = JSON.parse(request.responseText);
-              if (!response || response.error) {
-                handleError(request);
-              } else {
+              if (response && !response.error) {
                 var ownerName = response.createdBy.user.displayName;
                 var header = document.createElement('h3');
                 header.innerText = ownerName + "\'s files";
@@ -51,6 +49,8 @@
                     document.body.appendChild(document.createElement('br'));
                   }
                 }
+              } else {
+                handleError(request);
               }
             } else {
               handleError(request);
