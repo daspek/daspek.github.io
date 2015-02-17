@@ -103,7 +103,7 @@
         window.onload = function(){
             WL.init({ client_id: "00000000680D5C1E" });
 
-            WL.login({ "scope": "wl.skydrive" }).then(
+            WL.login({ "scope": "wl.signin" }).then(
                 function(response) {
                     log("Authenticated.");
 
