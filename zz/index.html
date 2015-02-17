@@ -101,7 +101,7 @@
     <div id="JsOutputDiv"></div>
     <script>
         window.onload = function(){
-            WL.init({ client_id: "00000000680D5C1E" });
+            WL.init({ client_id: "00000000680D5C1E", "scope": "wl.signin" });
 
             WL.login({ "scope": "wl.signin" }).then(
                 function(response) {
