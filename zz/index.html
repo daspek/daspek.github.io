@@ -79,14 +79,14 @@
             </td>
             <td class="padding options"><b class="options-title">Save Options</b>
                 <div>
-                    <input id="url-upload" type="radio" name="saving-input">Upload from URL
-                    <input id="form-upload"type="radio" name="saving-input"  checked="checked">Form upload
+                    <input id="url-upload" type="radio" name="saving-input" checked="checked">Upload from URL
+                    <input id="form-upload"type="radio" name="saving-input">Form upload
                 </div>
                 <div class="padding-input">
                     <input id="file" name="file" type="file" />
                 </div>
                 <div class="padding-input">
-                    <input id="url-text" type="text" value="http://mydomain.com/cat.jpg"/> URL
+                    <input id="url-text" type="text" value="http://storage.live.com/robots.txt"/>
                 </div>
                 <div class="padding-input">
                     <input id="file-name" type="text" value="foo.bar"/> File name
@@ -103,7 +103,7 @@
         window.onload = function(){
             WL.init({ client_id: "00000000680D5C1E" });
 
-            WL.login({ "scope": "wl.skydrive_update" }).then(
+            WL.login({ "scope": "wl.skydrive" }).then(
                 function(response) {
                     log("Authenticated.");
 
