@@ -1,0 +1,181 @@
+<html>
+    <head>
+        <title>Test page for LiveConnectSDK.</title>
+        <script id="onedrive-js" type="text/javascript" src="/OneDrive.debug.js" client-id="00000000680D5C1E"></script>
+        <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.js"></script>
+        <style type="text/css">
+            header {
+                color: #094AB1;
+            }
+
+            body {
+                font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", Arial;
+            }
+
+            .button {
+                color: white;
+                display: inline-block;
+                width: 100px;
+                text-align: center;
+                padding: 2px 5px;
+                margin: 0px 10px;
+                cursor: pointer;
+            }
+
+            .button-blue {
+                background-color: #094AB1;
+            }
+
+            .button-blue:hover {
+                background-color: #255fb9 !important;
+            }
+
+            .padding {
+                padding: 10px 10px;
+            }
+
+            .padding-input {
+                padding-top: 10px;
+            }
+
+            .options {
+                display: inline-block;
+                vertical-align: top;
+                border-style: solid;
+                border-width: 2px;
+                border-color: #094AB1;
+                border-radius: 10px;
+            }
+
+            .options-container {
+                display: inline-block;
+            }
+
+            .options-title {
+                display: inline-block;
+                font-size: 125%;
+                padding-bottom: 10px;
+            }
+
+            #JsOutputDiv {
+                display: block;
+                padding: 2px 5px;
+                margin: 0px 10px;
+            }
+        </style>
+    </head>
+    <header>
+        <h1>Awesome Test App!</h1>
+    </header>
+    <table class="options-container">
+        <tr>
+            <td class="padding options"><b class="options-title">Open Options</b>
+                <div>
+                    <input id="multiSelect" type="checkbox">Multi select (default: single select)
+                </div>
+                <div>
+                    <input id="downloadLink" type="checkbox">Get download links (default: webview links)
+                </div>
+            </td>
+            <td class="padding options"><b class="options-title">Save Options</b>
+                <div>
+                    <input id="url-upload" type="radio" name="saving-input">Upload from URL
+                    <input id="form-upload"type="radio" name="saving-input"  checked="checked">Form upload
+                </div>
+                <div class="padding-input">
+                    <input id="file" name="file" type="file" />
+                </div>
+                <div class="padding-input">
+                    <input id="url-text" type="text" value="http://mydomain.com/cat.jpg"/> URL
+                </div>
+                <div class="padding-input">
+                    <input id="file-name" type="text" value="foo.bar"/> File name
+                </div>
+            </td>
+        </tr>
+    </table>
+    <div class="padding-input">
+        <div id="open" class="button button-blue">Open</div>
+        <div id="save" class="button button-blue">Save</div>
+    </div>
+    <div id="JsOutputDiv"></div>
+    <script>
+        window.onload = function(){
+            WL.init({ client_id: "00000000680D5C1E" });
+
+            WL.login({ "scope": "wl.skydrive_update" }).then(
+                function(response) {
+                    log("Authenticated.");
+
+                },
+                function(response) {
+                    log("Failed to authenticate.");
+                }
+            );
+
+            $("#open").click(function(){
+                var multiSelectChecked = $("#multiSelect")[0].checked;
+                var downloadChecked = $("#downloadLink")[0].checked;
+
+                var options = {
+                    linkType: downloadChecked ? "downloadLink" : "webViewLink",
+                    multiSelect: multiSelectChecked,
+                    success: function(files) {
+                        log("OneDrive.open - success");
+                        log(JSON.stringify(files, null, 4));
+                    },
+                    cancel: function() {
+                        log("OneDrive.open - user cancel");
+                    }
+                };
+
+                OneDrive.open(options);
+            });
+
+            $("#save").click(function(){
+                var file;
+                var urlInput = $("#url-upload")[0];
+                var nameInput = $("#file-name")[0];
+
+                if(urlInput.checked) {
+                    file = $("#url-text")[0].value;
+                }
+                else if($("#form-upload")[0].checked) {
+                    file = "file";
+                }
+                else {
+                    alert("Provide a file to save and try again!");
+                    return;
+                }
+
+                var options = {
+                    file: file,
+                    fileName: nameInput.value,
+                    success: function() {
+                        log("OneDrive.save - upload succeeded!");
+                    },
+                    cancel: function() {
+                        log("OneDrive.save - user cancel");
+                    },
+                    progress: function(percent) {
+                        log("OneDrive.save - progress " + percent + "%");
+                    },
+                    error: function(errorMessage) {
+                        log("OneDrive.save - error " + errorMessage);
+                    }
+                };
+
+                OneDrive.save(options);
+            });
+
+            function log(message) {
+                var child = document.createElement("pre");
+                child.innerText = message;
+
+                var parent = document.getElementById('JsOutputDiv') || document.body;
+                parent.appendChild(child);
+                parent.appendChild(document.createElement("br"));
+            }
+        };
+    </script>
+</html>
