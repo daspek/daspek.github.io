@@ -133,7 +133,7 @@ function challengeForAuth()
   var url =
     "https://login.live.com/oauth20_authorize.srf?client_id=" + appInfo.appId +
     "&scope=" + appInfo.scopes +
-    "&response_type=token&redirect_url=https%3A%2F%2Flogin.live.com%2Foauth20_desktop.srf";
+    "&response_type=token&redirect_url=https%3A%2F%2Fdaspek.github.io%2F3drv%2Fcallback.html";
   popup(url);
 }
 
