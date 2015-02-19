@@ -87,13 +87,13 @@ function popup(url)
               "menubar=no",
               "scrollbars=yes"];
   var popup = window.open(url, "oauth", features.join(","));
-  popup.focus();
+  //popup.focus();
 }
 
 
 function getAppInfo()
 {
-  var scriptTag = getElementById("odauth");
+  var scriptTag = document.getElementById("odauth");
   if (!scriptTag) {
     alert("the script tag for odauth.js should have its id set to 'odauth'");
   }
