@@ -1,0 +1,65 @@
+#od-json {
+  overflow: hidden;
+  float: right;
+  max-width: 40%;
+}
+
+#od-items {
+  max-width: 60%;
+  float: left;
+}
+
+.item {
+  display: inline-block;
+  width: 200px;
+  height: 150px;
+  margin: 0.25em;
+  cursor: pointer;
+  background-color: lightgray;
+  border: 1px solid #094AB2;
+  overflow: hidden;
+  position: relative;
+}
+
+.nameplate {
+    /*background-color: #094AB2;*/
+    color: white;
+    width: 200px;
+    height: 16px;
+    padding: 1px;
+    position: absolute;
+    bottom: 0px;
+}
+
+.folder {
+  background-color: #094AB2;
+  color: white;
+}
+
+img {
+  height:auto;
+  width:auto;
+  max-width:200px;
+  max-height:150px;
+}
+
+.oneup {
+  width: 400px;
+  height: 300px;
+}
+
+.oneup img {
+  max-width: 400px;
+  max-height: 300px;
+}
+
+.hidden {
+  display: none;
+}
+
+pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
+.string { color: green; }
+.number { color: darkorange; }
+.boolean { color: blue; }
+.null { color: magenta; }
+.key { color: red; }
