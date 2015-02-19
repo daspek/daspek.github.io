@@ -6,7 +6,7 @@ function odauth() {
     onAuthenticated(token);
   }
   else {
-    challengeForAuth();
+    showLoginButton();
   }
 }
 
@@ -116,6 +116,15 @@ function getAppInfo()
   };
 
   return appInfo;
+}
+
+function showLoginButton()
+{
+  var loginText = document.createElement('h3');
+  loginText.id = "loginText";
+  loginText.onClick = "challengeForAuth()";
+  loginText.innerText = "[log in]";
+  document.body.appendChild(loginText);
 }
 
 function challengeForAuth()
