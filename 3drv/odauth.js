@@ -122,7 +122,7 @@ function showLoginButton()
 {
   var loginText = document.createElement('h3');
   loginText.id = "loginText";
-  loginText.onClick = "challengeForAuth()";
+  loginText.onclick = challengeForAuth;
   loginText.innerText = "[log in]";
   document.body.appendChild(loginText);
 }
