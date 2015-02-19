@@ -87,7 +87,7 @@ function popup(url)
               "menubar=no",
               "scrollbars=yes"];
   var popup = window.open(url, "oauth", features.join(","));
-  popup.focus();
+  //popup.focus();
 }
 
 
