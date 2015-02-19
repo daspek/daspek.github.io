@@ -93,7 +93,7 @@ function popup(url)
 
 function getAppInfo()
 {
-  var scriptTag = getElementById("odauth");
+  var scriptTag = document.getElementById("odauth");
   if (!scriptTag) {
     alert("the script tag for odauth.js should have its id set to 'odauth'");
   }
