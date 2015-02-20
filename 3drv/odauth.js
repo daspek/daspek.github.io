@@ -54,7 +54,7 @@ function getTokenFromCookie() {
 
 function setCookie(token, expiresInSeconds) {
   var expiration = new Date();
-  expiration.setTime(expiration.getTime() + secondsToExpiry * 1000);
+  expiration.setTime(expiration.getTime() + expiresInSeconds * 1000);
   var cookie = "odauth=" + token +"; path=/; expires=" + expiration.toUTCString();
 
   if (document.location.protocol.toLowerCase() == "https") {
