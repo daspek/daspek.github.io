@@ -128,6 +128,14 @@ function showLoginButton()
   document.body.appendChild(loginText);
 }
 
+function removeLoginButton()
+{
+  var loginText = document.getElementById("loginText");
+  if (loginText) {
+    document.body.removeChild(loginText);
+  }
+}
+
 function challengeForAuth()
 {
   var appInfo = getAppInfo();
