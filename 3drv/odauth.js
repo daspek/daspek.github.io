@@ -15,7 +15,7 @@ function onAuthCallback() {
   var token = authInfo["access_token"];
   var expiry = parseInt(authInfo["expires_in"]);
   setCookie(token, expiry);
-  window.opener.onAuthenticated(token);
+  window.opener.onAuthenticated(token, window);
 }
 
 function getAuthInfoFromUrl() {
@@ -34,7 +34,8 @@ function getAuthInfoFromUrl() {
 
 function getTokenFromCookie() {
   var cookies = document.cookie;
-  var start = cookies.indexOf("odauth=");
+  var name = "odauth=";
+  var start = cookies.indexOf(name);
   if (start >= 0) {
     start += name.length;
     var end = cookies.indexOf(';', start);
@@ -87,7 +88,7 @@ function popup(url)
               "menubar=no",
               "scrollbars=yes"];
   var popup = window.open(url, "oauth", features.join(","));
-  //popup.focus();
+  popup.focus();
 }
 
 
