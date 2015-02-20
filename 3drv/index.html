@@ -66,8 +66,12 @@
                 });
             }
 
-            function onAuthenticated(token) {
+            function onAuthenticated(token, authWindow) {
                 if (token) {
+                  if (authWindow) {
+                    authWindow.close();
+                  }
+              
                   (function($){
                     var path ="";
                     var beforePath = "";
