@@ -14,10 +14,11 @@
     <div id="od-json" class="od-pagecol"></div>
   </div>
   <script>
-  // $(window).bind('hashchange', function() {
-  //   odauth();
-  //   return false;
-  // });
+   var loadedPath = 'NIL';
+   $(window).bind('hashchange', function() {
+     odauth();
+     return false;
+   });
 
   $(document).on({
     ajaxStart: function() {$('body').addClass('loading');},
@@ -93,6 +94,11 @@
           afterPath = ":";
         }
 
+        if (loadedPath == path) {
+          return;
+        }
+
+        loadedPath = path;
         var odurl = "https://api.onedrive.com/v1.0/drive/root" + beforePath + path + afterPath;
         var odquery = "?expand=thumbnails,children(expand=thumbnails(select=large,c200x150_Crop))&access_token=" + token;
 
