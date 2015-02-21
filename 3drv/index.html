@@ -6,14 +6,15 @@
   <script id="odauth" src="odauth.js" clientId="000000004812DC2E" scopes="onedrive.readonly"></script>
 </head>
 <body>
-  <div id="signin"></div>
-  <label id="info"></label>
-  <div id="od-loadingInfo"></div>
+  <div id="header"/>
+  <div id="signin"/>
+  <label id="info"/>
+  <div id="od-loadingInfo"/>
   <div id="od-content">
     <div id="od-items" class="od-pagecol"></div>
     <div id="od-json" class="od-pagecol"></div>
   </div>
-  <div id="od-stats"></div>
+  <div id="od-stats"/>
   <script>
   $(window).bind('hashchange', function() {
     odauth();
@@ -139,6 +140,7 @@
                 var tile = $("<div>").
                 addClass("item").
                 addClass("oneup").
+                click(function(){window.location = data['@content.downloadUrl'];}).
                 appendTo("#od-items");
 
                 if (data.folder)
