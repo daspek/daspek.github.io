@@ -1,188 +1,180 @@
 <html>
-  <head>
-      <title>onedrive explorer</title>
-      <link rel="stylesheet" type="text/css" href="style.css">
-      <script type="text/javascript" src="https://code.jquery.com/jquery-1.4.2.min.js"></script>
-      <script id="odauth" src="odauth.js" clientId="000000004812DC2E" scopes="onedrive.readonly"></script>
-  </head>
-  <body>
-        <div id="signin"></div>
-        <label id="info"></label>
-        <div id="od-loadingInfo"></div>
-        <div id="od-content">
-          <div id="od-items" class="od-pagecol"></div>
-          <div id="od-json" class="od-pagecol"></div>
-        </div>
-        <div id="od-stats"></div>
-        <script>
-            $(window).bind('hashchange', function() {
-              odauth();
-              return false;
-            });
+<head>
+  <title>onedrive explorer</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.4.2.min.js"></script>
+  <script id="odauth" src="odauth.js" clientId="000000004812DC2E" scopes="onedrive.readonly"></script>
+</head>
+<body>
+  <div id="signin"></div>
+  <label id="info"></label>
+  <div id="od-loadingInfo"></div>
+  <div id="od-content">
+    <div id="od-items" class="od-pagecol"></div>
+    <div id="od-json" class="od-pagecol"></div>
+  </div>
+  <div id="od-stats"></div>
+  <script>
+  $(window).bind('hashchange', function() {
+    odauth();
+    return false;
+  });
 
-            function sanitize(obj)
-            {
-              if (obj)
+  function sanitize(obj)
+  {
+    if (obj)
+    {
+      if (obj.itemInfo)
+      {
+        obj.itemInfo = null;
+      }
+
+      if (obj.children)
+      {
+        for (var i = 0; i < obj.children.length; i++)
+        {
+          sanitize(obj.children[i]);
+        }
+      }
+    }
+  }
+
+  // from http://jsfiddle.net/KJQ9K/554/
+  function syntaxHighlight(obj) {
+    sanitize(obj);
+    if (obj.itemInfo && obj.itemInfo.CreatedBy)
+    {
+      obj.itemInfo.CreatedBy.userPassportId = null;
+    }
+
+    var json = JSON.stringify(obj, undefined, 4)
+    json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+      var cls = 'number';
+      if (/^"/.test(match)) {
+        if (/:$/.test(match)) {
+          cls = 'key';
+        } else {
+          cls = 'string';
+        }
+      } else if (/true|false/.test(match)) {
+        cls = 'boolean';
+      } else if (/null/.test(match)) {
+        cls = 'null';
+      }
+      return '<span class="' + cls + '">' + match + '</span>';
+    });
+  }
+
+  function onAuthenticated(token, authWindow) {
+    if (token) {
+      if (authWindow) {
+        removeLoginButton();
+        authWindow.close();
+      }
+
+      (function($){
+        var path = "";
+        var beforePath = "";
+        var afterPath = "";
+        var hashIndex = document.URL.indexOf('#');
+        if (hashIndex > 0)
+        {
+          path = document.URL.substr(hashIndex + 1);
+          beforePath =":";
+          afterPath = ":";
+        }
+
+        var odurl = "https://df.api.onedrive.com/v1.0/drive/root" + beforePath + path + afterPath;
+        var odquery = "?expand=thumbnails,children(expand=thumbnails)&access_token=" + token;
+
+        $('<p></p>').text('loading...').appendTo('#od-loadingInfo');
+        $.ajax({
+          url: odurl + odquery,
+          dataType: 'json',
+          success: function(data) {
+            if (data) {
+              $('#od-items').empty();
+              $('#od-loadingInfo').empty();
+              $('#od-json').empty();
+
+              $("<pre>").html(syntaxHighlight(data)).appendTo("#od-json");
+
+              var fullPath = path;
+              document.title = "onedrive explorer - " + fullPath;
+              $('<p></p>').text(fullPath).appendTo('#od-items');
+              var children = data.children;
+              if (!children)
+              children = data.value;
+              if (children && children.length > 0)
               {
-                if (obj.itemInfo)
-                {
-                  obj.itemInfo = null;
-                }
+                $.each(children, function(i,item) {
+                  var tile = $("<div>").
+                  attr("href", "#" + path + "/" + encodeURIComponent(item.name)).
+                  addClass("item").
+                  click(function(){window.location = $(this).attr('href');}).
+                  appendTo("#od-items");
 
-                if (obj.children)
-                {
-                  for (var i = 0; i < obj.children.length; i++)
+                  if (item.folder)
                   {
-                      sanitize(obj.children[i]);
+                    tile.addClass("folder");
                   }
-                }
-              }
-            }
 
-            // from http://jsfiddle.net/KJQ9K/554/
-            function syntaxHighlight(obj) {
-              sanitize(obj);
-              if (obj.itemInfo && obj.itemInfo.CreatedBy)
-              {
-                obj.itemInfo.CreatedBy.userPassportId = null;
-              }
+                  if (item.thumbnails && item.thumbnails.length > 0)
+                  {
+                    $("<img>").
+                    attr("src", item.thumbnails[0].medium.url).
+                    appendTo(tile);
+                  }
 
-                var json = JSON.stringify(obj, undefined, 4)
-                json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-                return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
-                    var cls = 'number';
-                    if (/^"/.test(match)) {
-                        if (/:$/.test(match)) {
-                            cls = 'key';
-                        } else {
-                            cls = 'string';
-                        }
-                    } else if (/true|false/.test(match)) {
-                        cls = 'boolean';
-                    } else if (/null/.test(match)) {
-                        cls = 'null';
-                    }
-                    return '<span class="' + cls + '">' + match + '</span>';
+                  $("<div>").
+                  addClass("nameplate").
+                  text(item.name).
+                  appendTo(tile);
                 });
+              }
+              else
+              {
+                // 1-up view
+                var tile = $("<div>").
+                addClass("item").
+                addClass("oneup").
+                appendTo("#od-items");
+
+                if (data.folder)
+                {
+                  tile.addClass("folder");
+                }
+
+                if (data.thumbnails && data.thumbnails.length > 0)
+                {
+                  $("<img>").
+                  attr("src", data.thumbnails[0].large.url).
+                  appendTo(tile);
+                }
+              }
+            } else {
+              $('#od-items').empty();
+              $('#od-loadingInfo').empty();
+              $('<p>error.</p>').appendTo('#od-loadingInfo');
+              $('#od-json').empty();
             }
 
-            function onAuthenticated(token, authWindow) {
-                if (token) {
-                  if (authWindow) {
-                    removeLoginButton();
-                    authWindow.close();
-                  }
-
-                  (function($){
-                    var path ="";
-                    var beforePath = "";
-                    var afterPath = "";
-                    var hashIndex = document.URL.indexOf('#');
-                    if (hashIndex > 0)
-                    {
-                      path = document.URL.substr(hashIndex + 1);
-                      beforePath =":";
-                      afterPath = ":";
-                    }
-
-                    var isFile = false;
-                    var filesplit = path.split('.');
-                    if (filesplit.length > 1)
-                    {
-                      isFile = true;
-                    }
-
-
-            var odurl = "https://df.api.onedrive.com/v1.0/drive/root" + beforePath + path + afterPath;
-            var odquery = "?$expand=thumbnails,children($expand=thumbnails)&access_token=" + token;
-
-              $('<p></p>').text('loading...').appendTo('#od-loadingInfo');
-             $.ajax({
-                      url: odurl + odquery,
-                      dataType: 'json',
-                      success: function(data) {
-                          if (data) {
-                              $('#od-items').empty();
-                              $('#od-loadingInfo').empty();
-                              $('#od-json').empty();
-
-                              $("<pre>").html(syntaxHighlight(data)).appendTo("#od-json");
-
-                                var fullPath = path;
-                                document.title = "twodrive - " + fullPath;
-                                $('<p></p>').text(fullPath).appendTo('#od-items');
-                                var children = data.children;
-                                if (!children)
-                                  children = data.value;
-                                if (children && children.length > 0)
-                                {
-                                  $.each(children, function(i,item) {
-                                      var tile = $("<div>").
-                                        attr("href", "#" + path + "/" + encodeURIComponent(item.name)).
-                                        addClass("item").
-                                        click(function(){window.location = $(this).attr('href');}).
-                                        appendTo("#od-items");
-
-                                      if (item.folder)
-                                      {
-                                        tile.addClass("folder");
-                                      }
-
-                                      if (item.thumbnails && item.thumbnails.length > 0)
-                                      {
-                                        $("<img>").
-                                          attr("src", item.thumbnails[0].large.url).
-                                          appendTo(tile);
-                                      }
-
-                                      $("<div>").
-                                        addClass("nameplate").
-                                        text(item.name).
-                                        appendTo(tile);
-                                  });
-                                }
-                                else
-                                {
-                                  // 1-up view
-                                  var tile = $("<div>").
-                                    addClass("item").
-                                    addClass("oneup").
-                                    appendTo("#od-items");
-
-                                  if (data.folder)
-                                  {
-                                    tile.addClass("folder");
-                                  }
-
-                                  if (data.thumbnails && data.thumbnails.length > 0)
-                                  {
-                                    $("<img>").
-                                      attr("src", data.thumbnails[0].large.url).
-                                      appendTo(tile);
-                                  }
-                                }
-                          } else {
-                              $('#od-items').empty();
-                              $('#od-loadingInfo').empty();
-                              $('<p>error.</p>').appendTo('#od-loadingInfo');
-                              $('#od-json').empty();
-                          }
-
-                          $('#od-stats').empty();
-                      }
-                  });
+            $('#od-stats').empty();
+          }
+        });
 
 
 
-                  })(jQuery);
-                }
-                else {
-                    document.getElementById("info").innerText =
-                        "Error signing in";
-                }
-            }
+      })(jQuery);
+    }
+    else {
+      document.getElementById("info").innerText =
+      "Error signing in";
+    }
+  }
 
-            odauth();
-        </script>
-  </body>
+  odauth();
+  </script>
+</body>
 </html>
