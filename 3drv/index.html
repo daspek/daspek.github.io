@@ -7,12 +7,12 @@
   <script id="odauth" src="odauth.js" clientId="000000004812DC2E" scopes="onedrive.readonly"></script>
 </head>
 <body>
-  <div id="od-loading"></div>
+  <div id="od-loading"/>
+  <div id="od-breadcrumb"/>
   <div id="od-content">
     <div id="od-items" class="od-pagecol"></div>
     <div id="od-json" class="od-pagecol"></div>
   </div>
-  <div id="od-stats"></div>
   <script>
   $(window).bind('hashchange', function() {
     odauth(true /*interactive*/);
@@ -70,6 +70,28 @@
     });
   }
 
+  function updateBreadcrumb(path)
+  {
+    if (!path) {
+      path = '';
+    }
+
+    $('#od-breadcrumb').empty();
+    var runningPath = '';
+    var segments = path.split('/');
+    for (int i = 0 ; i < segments.length; i++) {
+      if (i > 0) {
+        $('span').text(' > ').appendTo("#od-breadcrumb");
+      }
+
+      var segment = segments[i];
+      $('a').
+        attr("href", "#" + runningPath + '/' + encodeURIComponent(segment)).
+        text(segment || 'root').
+        appendTo("#od-breadcrumb");
+    }
+  }
+
   function onAuthenticated(token, authWindow) {
     if (token) {
       if (authWindow) {
@@ -102,9 +124,10 @@
 
               $("<pre>").html(syntaxHighlight(data)).appendTo("#od-json");
 
-              var fullPath = path;
-              document.title = "1drvx - " + fullPath;
-              $('<p></p>').text(fullPath).appendTo('#od-items');
+              var decodedPath = decodeURIComponent(path);
+              document.title = "1drvx - " + decodedPath;
+              updateBreadcrumb(decodedPath);
+//              $('<p></p>').text(fullPath).appendTo('#od-items');
               var children = data.children;
               if (!children)
               children = data.value;
@@ -161,8 +184,6 @@
               $('<p>error.</p>').appendTo('#od-items');
               $('#od-json').empty();
             }
-
-            $('#od-stats').empty();
           }
         });
       })(jQuery);
