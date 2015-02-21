@@ -7,7 +7,7 @@
   <script id="odauth" src="odauth.js" clientId="000000004812DC2E" scopes="onedrive.readonly"></script>
 </head>
 <body>
-  <div id="od-loadingInfo"></div>
+  <div id="od-loading"></div>
   <div id="od-content">
     <div id="od-items" class="od-pagecol"></div>
     <div id="od-json" class="od-pagecol"></div>
@@ -17,6 +17,11 @@
   $(window).bind('hashchange', function() {
     odauth(true /*interactive*/);
     return false;
+  });
+
+  $(document).on({
+    ajaxStart: function() {$body.addClass('loading');},
+    ajaxStop:  function() {$body.removeClass('loading');}
   });
 
   function sanitize(obj)

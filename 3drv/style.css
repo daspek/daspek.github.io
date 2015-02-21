@@ -9,6 +9,21 @@
   float: left;
 }
 
+#od-loading {
+  background: rgba(255,255,255,.8) url('https://d.sfx-df.ms/common/spinner_grey_60.gif') 50% 50% no-repeat;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  display: none;
+}
+
+body.loading #od-loading {
+  display: block;
+}
+
 .item {
   display: inline-block;
   width: 200px;
@@ -44,10 +59,12 @@ img {
 }
 
 .oneup {
-  width: auto;
+  width:  auto;
   height: auto;
-  max-width: 1600px;
+  max-width:  1600px;
   max-height: 1200px;
+  min-width:  200px;
+  min-height: 150px;
 }
 
 .oneup img {
