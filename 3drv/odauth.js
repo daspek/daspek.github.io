@@ -1,12 +1,12 @@
 
 
-function odauth(interactive) {
+function odauth(wasClicked) {
   ensureHttps();
   var token = getTokenFromCookie();
   if (token) {
     onAuthenticated(token);
   }
-  else if (interactive) {
+  else if (wasClicked) {
     challengeForAuth();
   }
   else {
@@ -40,7 +40,6 @@ function getAuthInfoFromUrl() {
     alert("failed to receive auth token");
   }
 }
-
 
 function getTokenFromCookie() {
   var cookies = document.cookie;

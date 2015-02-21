@@ -14,10 +14,10 @@
     <div id="od-json" class="od-pagecol"></div>
   </div>
   <script>
-  $(window).bind('hashchange', function() {
-    odauth(true /*interactive*/);
-    return false;
-  });
+  // $(window).bind('hashchange', function() {
+  //   odauth();
+  //   return false;
+  // });
 
   $(document).on({
     ajaxStart: function() {$('body').addClass('loading');},
@@ -111,7 +111,10 @@
                   var tile = $("<div>").
                     attr("href", "#" + path + "/" + encodeURIComponent(item.name)).
                     addClass("item").
-                    click(function(){window.location = $(this).attr('href');}).
+                    click(function() {
+                      window.location = $(this).attr('href');
+                      odauth(true);
+                    }).
                     appendTo("#od-items");
 
                   if (item.folder)
