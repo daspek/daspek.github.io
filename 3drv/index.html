@@ -17,6 +17,7 @@
    var loadedForHash = null;
    $(window).bind('hashchange', function() {
      if (window.location.hash != loadedForHash) {
+       loadedForHash = window.location.hash;
        odauth();
      }
 
@@ -98,11 +99,6 @@
           afterPath = ":";
         }
 
-        if (loadedPath == path) {
-          return;
-        }
-
-        loadedPath = path;
         var odurl = "https://api.onedrive.com/v1.0/drive/root" + beforePath + path + afterPath;
         var odquery = "?expand=thumbnails,children(expand=thumbnails(select=large,c200x150_Crop))&access_token=" + token;
 
