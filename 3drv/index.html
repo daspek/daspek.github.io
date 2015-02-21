@@ -14,9 +14,12 @@
     <div id="od-json" class="od-pagecol"></div>
   </div>
   <script>
-   var loadedPath = 'NIL';
+   var loadedForHash = null;
    $(window).bind('hashchange', function() {
-     odauth();
+     if (window.location.hash != loadedForHash) {
+       odauth();
+     }
+
      return false;
    });
 
@@ -67,7 +70,8 @@
       $('<a>').
         attr("href", "#" + runningPath).
         click(function() {
-          window.location = $(this).attr('href');
+          loadedForHash = $(this).attr('href');
+          window.location = loadedForHash;
           odauth(true);
         }).
         text(segment).
@@ -122,7 +126,8 @@
                     attr("href", "#" + path + "/" + encodeURIComponent(item.name)).
                     addClass("item").
                     click(function() {
-                      window.location = $(this).attr('href');
+                      loadedForHash = $(this).attr('href');
+                      window.location = loadedForHash;
                       odauth(true);
                     }).
                     appendTo("#od-items");
