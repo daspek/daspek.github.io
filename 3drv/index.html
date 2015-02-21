@@ -28,25 +28,25 @@
   function syntaxHighlight(obj) {
     var json = JSON.stringify(obj, undefined, 4)
     json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
-      var cls = 'number';
-      if (/^"/.test(match)) {
-        if (/:$/.test(match)) {
-          cls = 'key';
-        } else {
-          cls = 'string';
+    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
+      function (match) {
+        var cls = 'number';
+        if (/^"/.test(match)) {
+          if (/:$/.test(match)) {
+            cls = 'key';
+          } else {
+            cls = 'string';
+          }
+        } else if (/true|false/.test(match)) {
+          cls = 'boolean';
+        } else if (/null/.test(match)) {
+          cls = 'null';
         }
-      } else if (/true|false/.test(match)) {
-        cls = 'boolean';
-      } else if (/null/.test(match)) {
-        cls = 'null';
-      }
-      return '<span class="' + cls + '">' + match + '</span>';
-    });
+        return '<span class="' + cls + '">' + match + '</span>';
+      });
   }
 
-  function updateBreadcrumb(decodedPath)
-  {
+  function updateBreadcrumb(decodedPath) {
     var path = decodedPath || '';
     $('#od-breadcrumb').empty();
     var runningPath = '';
@@ -89,7 +89,7 @@
           afterPath = ":";
         }
 
-        var odurl = "https://df.api.onedrive.com/v1.0/drive/root" + beforePath + path + afterPath;
+        var odurl = "https://api.onedrive.com/v1.0/drive/root" + beforePath + path + afterPath;
         var odquery = "?expand=thumbnails,children(expand=thumbnails(select=large,c200x150_Crop))&access_token=" + token;
 
         $.ajax({
@@ -103,20 +103,16 @@
               $("<pre>").html(syntaxHighlight(data)).appendTo("#od-json");
 
               var decodedPath = decodeURIComponent(path);
-              document.title = "1drvx - " + decodedPath;
+              document.title = "1drv: " + decodedPath;
               updateBreadcrumb(decodedPath);
-//              $('<p></p>').text(fullPath).appendTo('#od-items');
-              var children = data.children;
-              if (!children)
-              children = data.value;
-              if (children && children.length > 0)
-              {
+              var children = data.children || data.value;
+              if (children && children.length > 0) {
                 $.each(children, function(i,item) {
                   var tile = $("<div>").
-                  attr("href", "#" + path + "/" + encodeURIComponent(item.name)).
-                  addClass("item").
-                  click(function(){window.location = $(this).attr('href');}).
-                  appendTo("#od-items");
+                    attr("href", "#" + path + "/" + encodeURIComponent(item.name)).
+                    addClass("item").
+                    click(function(){window.location = $(this).attr('href');}).
+                    appendTo("#od-items");
 
                   if (item.folder)
                   {
@@ -126,24 +122,23 @@
                   if (item.thumbnails && item.thumbnails.length > 0)
                   {
                     $("<img>").
-                    attr("src", item.thumbnails[0].c200x150_Crop.url).
-                    appendTo(tile);
+                      attr("src", item.thumbnails[0].c200x150_Crop.url).
+                      appendTo(tile);
                   }
 
                   $("<div>").
-                  addClass("nameplate").
-                  text(item.name).
-                  appendTo(tile);
+                    addClass("nameplate").
+                    text(item.name).
+                    appendTo(tile);
                 });
               }
-              else
-              {
+              else {
                 // 1-up view
                 var tile = $("<div>").
-                addClass("item").
-                addClass("oneup").
-                click(function(){window.location = data['@content.downloadUrl'];}).
-                appendTo("#od-items");
+                  addClass("item").
+                  addClass("oneup").
+                  click(function(){window.location = data['@content.downloadUrl'];}).
+                  appendTo("#od-items");
 
                 if (data.folder)
                 {
@@ -153,8 +148,8 @@
                 if (data.thumbnails && data.thumbnails.length > 0)
                 {
                   $("<img>").
-                  attr("src", data.thumbnails[0].large.url).
-                  appendTo(tile);
+                    attr("src", data.thumbnails[0].large.url).
+                    appendTo(tile);
                 }
               }
             } else {
