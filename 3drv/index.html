@@ -6,15 +6,15 @@
   <script id="odauth" src="odauth.js" clientId="000000004812DC2E" scopes="onedrive.readonly"></script>
 </head>
 <body>
-  <div id="header"/>
-  <div id="signin"/>
-  <label id="info"/>
-  <div id="od-loadingInfo"/>
+  <div id="header"></div>
+  <div id="signin"></div>
+  <label id="info"></label>
+  <div id="od-loadingInfo"></div>
   <div id="od-content">
     <div id="od-items" class="od-pagecol"></div>
     <div id="od-json" class="od-pagecol"></div>
   </div>
-  <div id="od-stats"/>
+  <div id="od-stats"></div>
   <script>
   $(window).bind('hashchange', function() {
     odauth();
