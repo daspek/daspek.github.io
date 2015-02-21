@@ -92,14 +92,12 @@
         var odurl = "https://df.api.onedrive.com/v1.0/drive/root" + beforePath + path + afterPath;
         var odquery = "?expand=thumbnails,children(expand=thumbnails)&access_token=" + token;
 
-        $('<p></p>').text('loading...').appendTo('#od-loadingInfo');
         $.ajax({
           url: odurl + odquery,
           dataType: 'json',
           success: function(data) {
             if (data) {
               $('#od-items').empty();
-              $('#od-loadingInfo').empty();
               $('#od-json').empty();
 
               $("<pre>").html(syntaxHighlight(data)).appendTo("#od-json");
@@ -160,22 +158,17 @@
               }
             } else {
               $('#od-items').empty();
-              $('#od-loadingInfo').empty();
-              $('<p>error.</p>').appendTo('#od-loadingInfo');
+              $('<p>error.</p>').appendTo('#od-items');
               $('#od-json').empty();
             }
 
             $('#od-stats').empty();
           }
         });
-
-
-
       })(jQuery);
     }
     else {
-      document.getElementById("info").innerText =
-      "Error signing in";
+      alert("Error signing in");
     }
   }
 
