@@ -57,10 +57,15 @@
       }
 
       var segment = segments[i];
-      runningPath = runningPath + '/' + encodeURIComponent(segment);
+      if (segment) {
+        runningPath = runningPath + '/' + encodeURIComponent(segment);
+      } else {
+        segment = 'root';
+      }
+
       $('<a>').
         attr("href", "#" + runningPath).
-        text(segment || 'root').
+        text(segment).
         appendTo("#od-breadcrumb");
     }
   }
