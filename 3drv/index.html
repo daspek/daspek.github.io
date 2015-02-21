@@ -70,23 +70,21 @@
     });
   }
 
-  function updateBreadcrumb(path)
+  function updateBreadcrumb(decodedPath)
   {
-    if (!path) {
-      path = '';
-    }
-
+    var path = decodedPath || '';
     $('#od-breadcrumb').empty();
     var runningPath = '';
     var segments = path.split('/');
     for (var i = 0 ; i < segments.length; i++) {
       if (i > 0) {
-        $('span').text(' > ').appendTo("#od-breadcrumb");
+        $('span').text(' _ ').appendTo("#od-breadcrumb");
       }
 
+      runningPath = runningPath + '/' + encodeURIComponent(segment);
       var segment = segments[i];
       $('a').
-        attr("href", "#" + runningPath + '/' + encodeURIComponent(segment)).
+        attr("href", "#" + runningPath).
         text(segment || 'root').
         appendTo("#od-breadcrumb");
     }
