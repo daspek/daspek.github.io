@@ -65,6 +65,10 @@
 
       $('<a>').
         attr("href", "#" + runningPath).
+        click(function() {
+          window.location = $(this).attr('href');
+          odauth(true);
+        }).
         text(segment).
         appendTo("#od-breadcrumb");
     }
