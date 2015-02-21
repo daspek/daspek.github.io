@@ -1,14 +1,12 @@
-<html>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <title>onedrive explorer</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <script type="text/javascript" src="https://code.jquery.com/jquery-1.4.2.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css"/>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
   <script id="odauth" src="odauth.js" clientId="000000004812DC2E" scopes="onedrive.readonly"></script>
 </head>
 <body>
-  <div id="header"></div>
-  <div id="signin"></div>
-  <label id="info"></label>
   <div id="od-loadingInfo"></div>
   <div id="od-content">
     <div id="od-items" class="od-pagecol"></div>
@@ -17,7 +15,7 @@
   <div id="od-stats"></div>
   <script>
   $(window).bind('hashchange', function() {
-    odauth();
+    odauth(true /*interactive*/);
     return false;
   });
 
