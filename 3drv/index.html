@@ -151,8 +151,12 @@
                 var tile = $("<div>").
                   addClass("item").
                   addClass("oneup").
-                  click(function(){window.location = data['@content.downloadUrl'];}).
                   appendTo("#od-items");
+
+                var downloadUrl = data['@content.downloadUrl'];
+                if (downloadUrl) {
+                  tile.click(function(){window.location = downloadUrl;});
+                }
 
                 if (data.folder)
                 {
