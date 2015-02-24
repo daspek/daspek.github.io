@@ -105,32 +105,6 @@ function setCookie(token, expiresInSeconds) {
   document.cookie = cookie;
 }
 
-function popup(url) {
-  var width = 525,
-      height = 525,
-      screenX = window.screenX,
-      screenY = window.screenY,
-      outerWidth = window.outerWidth,
-      outerHeight = window.outerHeight;
-
-  var left = screenX + Math.max(outerWidth - width, 0) / 2;
-  var top = screenY + Math.max(outerHeight - height, 0) / 2;
-
-  var features = [
-              "width=" + width,
-              "height=" + height,
-              "top=" + top,
-              "left=" + left,
-              "status=no",
-              "resizable=yes",
-              "toolbar=no",
-              "menubar=no",
-              "scrollbars=yes"];
-  var popup = window.open(url, "oauth", features.join(","));
-  popup.focus();
-}
-
-
 function getAppInfo() {
   var scriptTag = document.getElementById("odauth");
   if (!scriptTag) {
@@ -164,10 +138,11 @@ function getAppInfo() {
 // called when a login button needs to be displayed for the user to click on.
 // if a customLoginButton() function is defined by your app, it will be called
 // with 'true' passed in to indicate the button should be added. otherwise, it
-// will insert a textual login link at the top of the page.
+// will insert a textual login link at the top of the page. if defined, your
+// showCustomLoginButton should call challengeForAuth() when clicked.
 function showLoginButton() {
-  if (typeof customLoginButton === "function") {
-    showCustomLoginButtion(true);
+  if (typeof showCustomLoginButton === "function") {
+    showCustomLoginButton(true);
     return;
   }
 
@@ -184,8 +159,8 @@ function showLoginButton() {
 // be called with 'false' passed in to indicate the button should be removed.
 // otherwise it will remove the textual link that showLoginButton() created.
 function removeLoginButton() {
-  if (typeof customLoginButton === "function") {
-    showCustomLoginButtion(false);
+  if (typeof showCustomLoginButton === "function") {
+    showCustomLoginButton(false);
     return;
   }
 
@@ -204,4 +179,33 @@ function challengeForAuth() {
     "&response_type=token" +
     "&redirect_uri=" + encodeURIComponent(appInfo.redirectUri);
   popup(url);
+}
+
+function popup(url) {
+  var width = 525,
+      height = 525,
+      screenX = window.screenX,
+      screenY = window.screenY,
+      outerWidth = window.outerWidth,
+      outerHeight = window.outerHeight;
+
+  var left = screenX + Math.max(outerWidth - width, 0) / 2;
+  var top = screenY + Math.max(outerHeight - height, 0) / 2;
+
+  var features = [
+              "width=" + width,
+              "height=" + height,
+              "top=" + top,
+              "left=" + left,
+              "status=no",
+              "resizable=yes",
+              "toolbar=no",
+              "menubar=no",
+              "scrollbars=yes"];
+  var popup = window.open(url, "oauth", features.join(","));
+  if (!popup) {
+    alert("failed to pop up auth window");
+  }
+
+  popup.focus();
 }
