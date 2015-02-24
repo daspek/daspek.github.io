@@ -28,7 +28,7 @@
     // tried to pop up a window, most browsers' popup blockers would block it).
     // this handler needs to call odauth in non-click mode since it doesn't
     // know why the hash changed.
-    var loadedForHash = null;
+    var loadedForHash = "";
     $(window).bind('hashchange', function() {
       if (window.location.hash != loadedForHash) {
         loadedForHash = window.location.hash;
