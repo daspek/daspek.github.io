@@ -3589,7 +3589,9 @@ function handlePageAction() {
 
         if (display === DISPLAY_TOUCH && wl_app._browser.ie) {
             // For mobile IE, we do navigation.
-            document.location = pageState[AK_REDIRECT_URI];
+            var redirLocation = pageState[AK_REDIRECT_URI];
+            validateRedirectUrl(redirLocation);
+            document.location = redirLocation;
         } else {
             // For popup window, we close it.
             window.close();
@@ -3607,6 +3609,31 @@ function handlePageAction() {
         if (appInit && (typeof (appInit) === TYPE_FUNCTION)) {
             appInit.call();
         }
+    }
+}
+
+// ensure the url is an absolute http(s) url with
+// a matching domain to the current one, or a sub-domain.
+function validateRedirectUrl(url) {
+    if (url != null) {
+        var uri = new Uri(url);
+        if (uri.scheme != "") {
+            var currentHost = window.location.host;
+            var redirHost = uri.host;
+            if (redirHost == currentHost) {
+                // the hosts match exactly
+                return;
+            }
+
+            // for non-matching hosts, only allow it if the redirect url is a subdomain
+            currentHost = '.' + currentHost;
+            if (redirHost.indexOf(currentHost, redirHost.length - currentHost.length) !== -1) {
+                return;
+            }
+        }
+
+        // all other cases fail
+        throw new Error(ERROR_DESC_REDIRECTURI_INVALID_WWA.replace("WL.init", "WL.login"));
     }
 }
 
@@ -6958,7 +6985,7 @@ wl_app._locale = "en";
         intSettings[WL_APISERVICE_URI] = "https://apis.live-int.net/v5.0/";
         intSettings[WL_SKYDRIVE_URI] = "https://onedrive.live-int.com/";
         intSettings[WL_SDK_ROOT] = "//js.live-int.net/v5.0/";
-        intSettings[WL_ONEDRIVE_API] = "https://newapi.storage.live-int.com/v1.0/";
+        intSettings[WL_ONEDRIVE_API] = prodSettings[WL_ONEDRIVE_API];
 
         wl_app._settings =
         {
@@ -6975,7 +7002,7 @@ wl_app._locale = "en";
             }
         };
 
-        wl_app._settings.init("INT");
+        wl_app._settings.init("PROD");
 
         wl_app[FILEDIALOG_PARAM_PICKER_SCRIPT] = "wl.skydrivepicker.debug.js";
         wl_app.onloadInit();
