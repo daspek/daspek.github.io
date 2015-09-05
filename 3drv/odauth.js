@@ -177,6 +177,7 @@ function challengeForAuth() {
     "?client_id=" + appInfo.clientId +
     "&scope=" + encodeURIComponent(appInfo.scopes) +
     "&response_type=token" +
+    "&display=none" +
     "&redirect_uri=" + encodeURIComponent(appInfo.redirectUri);
   popup(url);
 }
