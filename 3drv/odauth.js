@@ -56,7 +56,7 @@ function onAuthCallback() {
   var token = authInfo["access_token"];
   var expiry = parseInt(authInfo["expires_in"]);
   setCookie(token, expiry);
-  window.opener.onAuthenticated(token, window);
+  window.parent.onAuthenticated(token, window);
 }
 
 function getAuthInfoFromUrl() {
@@ -203,10 +203,15 @@ function popup(url) {
               "toolbar=no",
               "menubar=no",
               "scrollbars=yes"];
-  var popup = window.open(url, "oauth", features.join(","));
-  if (!popup) {
-    alert("failed to pop up auth window");
-  }
+              
+var iframe = document.createElement('iframe');
+iframe.src = url;
+document.body.appendChild(iframe);
+              
+  //var popup = window.open(url, "oauth", features.join(","));
+  //if (!popup) {
+  //  alert("failed to pop up auth window");
+  //}
 
-  popup.focus();
+  //popup.focus();
 }
