@@ -44,6 +44,17 @@ function odauth(wasClicked) {
   }
 }
 
+function odauthSilent() {
+  ensureHttps();
+  var token = getTokenFromCookie();
+  if (token) {
+    onAuthenticated(token);
+  }
+  else {
+    trySilentAuth();
+  }  
+}
+
 // for added security we require https
 function ensureHttps() {
   if (window.location.protocol != "https:") {
@@ -54,8 +65,11 @@ function ensureHttps() {
 function onAuthCallback() {
   var authInfo = getAuthInfoFromUrl();
   var token = authInfo["access_token"];
-  var expiry = parseInt(authInfo["expires_in"]);
-  setCookie(token, expiry);
+  if (token) {
+    var expiry = parseInt(authInfo["expires_in"]);
+    setCookie(token, expiry);    
+  }
+
   window.parent.onAuthenticated(token, window);
 }
 
@@ -177,9 +191,23 @@ function challengeForAuth() {
     "?client_id=" + appInfo.clientId +
     "&scope=" + encodeURIComponent(appInfo.scopes) +
     "&response_type=token" +
-    "&display=none" +
     "&redirect_uri=" + encodeURIComponent(appInfo.redirectUri);
   popup(url);
+}
+
+function trySilentAuth() {
+   var url =
+    "https://login.live.com/oauth20_authorize.srf" +
+    "?client_id=" + appInfo.clientId +
+    "&scope=" + encodeURIComponent(appInfo.scopes) +
+    "&response_type=token" +
+    "&display=none" +
+    "&redirect_uri=" + encodeURIComponent(appInfo.redirectUri);
+
+  var iframe = document.createElement('iframe');
+  iframe.src = url;
+  iframe.style = "display: none;";
+  document.body.appendChild(iframe);
 }
 
 function popup(url) {
@@ -204,14 +232,10 @@ function popup(url) {
               "menubar=no",
               "scrollbars=yes"];
               
-var iframe = document.createElement('iframe');
-iframe.src = url;
-document.body.appendChild(iframe);
-              
-  //var popup = window.open(url, "oauth", features.join(","));
-  //if (!popup) {
-  //  alert("failed to pop up auth window");
-  //}
+  var popup = window.open(url, "oauth", features.join(","));
+  if (!popup) {
+   alert("failed to pop up auth window");
+  }
 
-  //popup.focus();
+  popup.focus();
 }
