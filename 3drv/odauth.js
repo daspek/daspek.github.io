@@ -196,6 +196,7 @@ function challengeForAuth() {
 }
 
 function trySilentAuth() {
+   var appInfo = getAppInfo();
    var url =
     "https://login.live.com/oauth20_authorize.srf" +
     "?client_id=" + appInfo.clientId +
