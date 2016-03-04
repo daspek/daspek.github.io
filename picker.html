@@ -3,7 +3,7 @@
   <title>sp</title>
   <script>
     function msg() {
-      window.opener.postMessage('thetoken', '*');
+      (window.opener||window.parent).postMessage('thetoken', '*');
     }
   </script>
 </head>
