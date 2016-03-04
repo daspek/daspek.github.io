@@ -1,0 +1,22 @@
+<html>
+<head>
+  <title>sp</title>
+  <script>
+    function msg() {
+      window.opener.givetoken('hi');
+    }
+    
+    function givetoken(token) {
+      var tokendiv = document.createElement('div');
+      tokendiv.innerText = token;
+      document.body.appendChild(tokendiv);
+    }
+  </script>
+</head>
+<body>
+i am the popup thing.
+<br/>
+<a href="javascript:msg()">pick</a>
+
+</body>
+</html>
