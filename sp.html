@@ -2,14 +2,12 @@
 <head>
   <title>sp</title>
   <script>
-    function popiframe() {
+    function popiframe(destination) {
         var iframe = document.createElement('iframe');
-        iframe.src = "https://ae0c471f.ngrok.io/picker.html";
+        iframe.src = destination;
         iframe.width = 640;
         iframe.height = 480;
         document.body.appendChild(iframe);
-        givetoken('waiting...');
-        givetoken('waiting... ');
     }
     
     function givetoken(token) {
@@ -31,10 +29,14 @@
 <body>
 run me in the trusted zone. i'll pop up a window and see if you're still logged in.
 <br/>
-<a href="javascript:window.open('https://ae0c471f.ngrok.io/picker.html','popup','width=640,height=480')">popup</a>
+<a href="javascript:window.open('https://ae0c471f.ngrok.io/picker.html','popup','width=640,height=480')">popup picker</a>
+<br/>
+<a href="javascript:window.open('https://storage.live.com/mydata','popup','width=640,height=480')">popup wlsrest</a>
 <br/>
 <br/>
-<a href="javascript:popiframe()">iframe</a>
+<a href="javascript:popiframe('https://ae0c471f.ngrok.io/picker.html')">iframe picker</a>
+<br/>
+<a href="javascript:popiframe('https://storage.live.com/mydata')">iframe picker</a>
 
 </body>
 </html>
