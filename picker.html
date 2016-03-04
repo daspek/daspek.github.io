@@ -3,13 +3,7 @@
   <title>sp</title>
   <script>
     function msg() {
-      window.opener.givetoken('hi');
-    }
-    
-    function givetoken(token) {
-      var tokendiv = document.createElement('div');
-      tokendiv.innerText = token;
-      document.body.appendChild(tokendiv);
+      window.opener.postMessage('thetoken', '*');
     }
   </script>
 </head>
