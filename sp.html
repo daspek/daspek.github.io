@@ -8,6 +8,14 @@
         iframe.width = 640;
         iframe.height = 480;
         document.body.appendChild(iframe);
+        givetoken('waiting...');
+        givetoken('waiting... ');
+    }
+    
+    function givetoken(token) {
+      var tokendiv = document.createElement('div');
+      tokendiv.innerText = token;
+      document.body.appendChild(tokendiv);
     }
   </script>
 </head>
