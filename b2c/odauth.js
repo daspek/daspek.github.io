@@ -69,6 +69,8 @@ function onAuthCallback() {
     window.parent.onAuthenticated(token, window);    
     //var expiry = parseInt(authInfo["expires_in"]);
     //setCookie(token, expiry);    
+  } else {
+    showLoginButton();
   }
 }
 
