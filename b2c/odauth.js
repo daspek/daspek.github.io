@@ -209,7 +209,7 @@ function challengeForAuth() {
     "?client_id=" + appInfo.clientId +
     "&response_type=id_token" +
     "&redirect_uri=" + encodeURIComponent(appInfo.redirectUri) +
-    "&response_mode=query&scope=openid" +
+    "&response_mode=query" +
     "&scope=" + encodeURIComponent(appInfo.scopes) +
     "&state=arbitrary_data_you_can_receive_in_the_response" +
     "&nonce=12355" +
@@ -235,7 +235,7 @@ function trySilentAuth() {
     "?client_id=" + appInfo.clientId +
     "&response_type=id_token" +
     "&redirect_uri=" + encodeURIComponent(appInfo.redirectUri) +
-    "&response_mode=query&scope=openid" +
+    "&response_mode=query" +
     "&scope=" + encodeURIComponent(appInfo.scopes) +
     "&state=arbitrary_data_you_can_receive_in_the_response" +
     "&nonce=12355" +
