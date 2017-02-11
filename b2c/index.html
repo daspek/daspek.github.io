@@ -118,6 +118,7 @@
                 var jwt = JSON.parse(window.atob(base64Jwt));
                 $('#od-json').empty();
                 $("<pre>").html(syntaxHighlight(jwt)).appendTo("#od-json");
+
 /*
 
           // we extract the onedrive path from the url fragment and we

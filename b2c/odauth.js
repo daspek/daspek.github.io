@@ -65,12 +65,11 @@ function ensureHttps() {
 function onAuthCallback() {
   var authInfo = getAuthInfoFromUrl();
   var token = authInfo["id_token"];
-  //if (token) {
+  if (token) {
+    window.parent.onAuthenticated(token, window);    
     //var expiry = parseInt(authInfo["expires_in"]);
     //setCookie(token, expiry);    
-  //}
-
-  window.parent.onAuthenticated(token, window);
+  }
 }
 
 function getAuthInfoFromUrl() {
