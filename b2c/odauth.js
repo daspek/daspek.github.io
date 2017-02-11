@@ -85,7 +85,8 @@ function getAuthInfoFromUrl() {
     return authInfo;
   }
   else {
-    alert("failed to receive auth token");
+    return { };
+    //alert("failed to receive auth token");
   }
 }
 
