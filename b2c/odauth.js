@@ -73,7 +73,7 @@ function onAuthCallback() {
     //setCookie(token, expiry);    
   }
 
-    window.parent.onAuthenticated(token, window);  
+    window.opener.onAuthenticated(token, window);  
 }
 
 function getAuthInfoFromUrl() {
