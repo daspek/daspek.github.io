@@ -207,13 +207,14 @@ function challengeForAuth() {
   var url =
     "https://login.microsoftonline.com/odb2c.onmicrosoft.com/oauth2/v2.0/authorize" +
     "?client_id=" + appInfo.clientId +
-    "&scope=" + encodeURIComponent(appInfo.scopes) +
     "&response_type=id_token" +
+    "&redirect_uri=" + encodeURIComponent(appInfo.redirectUri) +
     "&response_mode=query&scope=openid" +
+    "&scope=" + encodeURIComponent(appInfo.scopes) +
     "&state=arbitrary_data_you_can_receive_in_the_response" +
     "&nonce=12355" +
     "&p=b2c_1_signupin" +
-    "&redirect_uri=" + encodeURIComponent(appInfo.redirectUri);
+    "";
   popup(url);
 }
 
@@ -232,14 +233,15 @@ function trySilentAuth() {
    var url =
     "https://login.microsoftonline.com/odb2c.onmicrosoft.com/oauth2/v2.0/authorize" +
     "?client_id=" + appInfo.clientId +
-    "&scope=" + encodeURIComponent(appInfo.scopes) +
     "&response_type=id_token" +
+    "&redirect_uri=" + encodeURIComponent(appInfo.redirectUri) +
     "&response_mode=query&scope=openid" +
+    "&scope=" + encodeURIComponent(appInfo.scopes) +
     "&state=arbitrary_data_you_can_receive_in_the_response" +
     "&nonce=12355" +
     "&p=b2c_1_signupin" +
     "&prompt=none" +
-    "&redirect_uri=" + encodeURIComponent(appInfo.redirectUri);
+    "";
 
   var iframe = document.createElement('iframe');
   iframe.src = url;
