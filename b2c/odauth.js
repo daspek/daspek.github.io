@@ -45,6 +45,8 @@ function odauth(wasClicked) {
 }
 
 function odauthSilent() {
+  odauth(false);
+  /*
   ensureHttps();
   var token = getTokenFromCookie();
   if (token) {
@@ -53,6 +55,7 @@ function odauthSilent() {
   else {
     trySilentAuth();
   }  
+  */
 }
 
 // for added security we require https
