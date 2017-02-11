@@ -64,18 +64,18 @@ function ensureHttps() {
 
 function onAuthCallback() {
   var authInfo = getAuthInfoFromUrl();
-  var token = authInfo["access_token"];
-  if (token) {
-    var expiry = parseInt(authInfo["expires_in"]);
-    setCookie(token, expiry);    
-  }
+  var token = authInfo["id_token"];
+  //if (token) {
+    //var expiry = parseInt(authInfo["expires_in"]);
+    //setCookie(token, expiry);    
+  //}
 
   window.parent.onAuthenticated(token, window);
 }
 
 function getAuthInfoFromUrl() {
-  if (window.location.hash) {
-    var authResponse = window.location.hash.substring(1);
+  if (window.location.search) {
+    var authResponse = window.location.search.substring(1);
     var authInfo = JSON.parse(
       '{"' + authResponse.replace(/&/g, '","').replace(/=/g, '":"') + '"}',
       function(key, value) { return key === "" ? value : decodeURIComponent(value); });
@@ -184,25 +184,61 @@ function removeLoginButton() {
   }
 }
 
+function showCustomLoginButton(signIn) {
+   var loginText = document.getElementById("loginText");
+   if (!loginText) {
+      loginText = document.createElement('a');
+      loginText.href = "#";
+      loginText.id = "loginText";
+      document.body.insertBefore(loginText, document.body.children[0]);
+   }
+
+   if (signIn) {
+    loginText.onclick = challengeForAuth;
+    loginText.innerText = "[sign in]";
+   } else {
+      loginText.onclick = signOutAuth;
+      loginText.innerText = "[sign out]";
+   }
+}
+
 function challengeForAuth() {
   var appInfo = getAppInfo();
   var url =
-    "https://login.live.com/oauth20_authorize.srf" +
+    "https://login.microsoftonline.com/odb2c.onmicrosoft.com/oauth2/v2.0/authorize" +
     "?client_id=" + appInfo.clientId +
     "&scope=" + encodeURIComponent(appInfo.scopes) +
-    "&response_type=token" +
+    "&response_type=id_token" +
+    "&response_mode=query&scope=openid" +
+    "&state=arbitrary_data_you_can_receive_in_the_response" +
+    "&nonce=12355" +
+    "&p=b2c_1_signupin" +
     "&redirect_uri=" + encodeURIComponent(appInfo.redirectUri);
+  popup(url);
+}
+
+
+function signOutAuth() {
+  var appInfo = getAppInfo();
+  var url =
+    "https://login.microsoftonline.com/odb2c.onmicrosoft.com/oauth2/v2.0/logout" +
+    "?p=b2c_1_signupin" +
+    "&post_logout_redirect_uri=" + encodeURIComponent(appInfo.redirectUri);
   popup(url);
 }
 
 function trySilentAuth() {
    var appInfo = getAppInfo();
    var url =
-    "https://login.live.com/oauth20_authorize.srf" +
+    "https://login.microsoftonline.com/odb2c.onmicrosoft.com/oauth2/v2.0/authorize" +
     "?client_id=" + appInfo.clientId +
     "&scope=" + encodeURIComponent(appInfo.scopes) +
-    "&response_type=token" +
-    "&display=none" +
+    "&response_type=id_token" +
+    "&response_mode=query&scope=openid" +
+    "&state=arbitrary_data_you_can_receive_in_the_response" +
+    "&nonce=12355" +
+    "&p=b2c_1_signupin" +
+    "&prompt=none" +
     "&redirect_uri=" + encodeURIComponent(appInfo.redirectUri);
 
   var iframe = document.createElement('iframe');
