@@ -1,0 +1,43 @@
+<html>
+<head>
+  <title>sp</title>
+  <script>
+    function popiframe(destination) {
+        var iframe = document.createElement('iframe');
+        iframe.src = destination;
+        iframe.width = 640;
+        iframe.height = 480;
+        document.body.appendChild(iframe);
+    }
+    
+    function givetoken(token) {
+      var tokendiv = document.createElement('div');
+      tokendiv.innerText = token;
+      document.body.appendChild(tokendiv);
+    }
+    
+    window.addEventListener("message", receiveMessage, false);
+
+    function receiveMessage(event)
+    {
+      var origin = event.origin || event.originalEvent.origin;
+      givetoken(origin);
+      givetoken(event.data);
+    }
+  </script>
+</head>
+<body>
+run me in the trusted zone. i'll pop up a window and see if you're still logged in.
+<br/>
+<a href="javascript:window.open('https://ae0c471f.ngrok.io/picker.html','popup','width=640,height=480')">popup picker</a>
+<br/>
+<a href="javascript:window.open('https://storage.live.com/mydata','popup','width=640,height=480')">popup wlsrest</a>
+<br/>
+<br/>
+<a href="javascript:popiframe('https://ae0c471f.ngrok.io/picker.html')">iframe picker</a>
+<br/>
+<a href="javascript:popiframe('https://storage.live.com/mydata')">iframe picker</a>
+<br/>
+<iframe src="https://onedrive.live.com/embed?cid=D4648F06C91D9D3D&resid=D4648F06C91D9D3D%2160104&authkey=AOa0oQxThuE0C78" width="320" height="137" frameborder="0" scrolling="no" allowfullscreen></iframe>
+</body>
+</html>

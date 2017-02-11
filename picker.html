@@ -1,0 +1,16 @@
+<html>
+<head>
+  <title>sp</title>
+  <script>
+    function msg() {
+      (window.opener||window.parent).postMessage('thetoken', '*');
+    }
+  </script>
+</head>
+<body>
+i am the popup thing.
+<br/>
+<a href="javascript:msg()">pick</a>
+
+</body>
+</html>
