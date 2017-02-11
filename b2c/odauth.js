@@ -66,12 +66,11 @@ function onAuthCallback() {
   var authInfo = getAuthInfoFromUrl();
   var token = authInfo["id_token"];
   if (token) {
-    window.parent.onAuthenticated(token, window);    
     //var expiry = parseInt(authInfo["expires_in"]);
     //setCookie(token, expiry);    
-  } else {
-    showLoginButton();
   }
+
+    window.parent.onAuthenticated(token, window);  
 }
 
 function getAuthInfoFromUrl() {
